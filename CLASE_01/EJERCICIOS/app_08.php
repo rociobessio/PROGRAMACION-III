@@ -8,13 +8,10 @@ $v[1]=90; $v[30]=7; $v['e']=99; $v['hola']= 'mundo';
 Bessio Rocio Soledad
 */
 
-    $arrayAsociativo = array();
-    $arrayAsociativo[1] = 90;
-    $arrayAsociativo[30] = 7;
-    $arrayAsociativo['e'] = 99;
-    $arrayAsociativo['hola'] = 'mundo';
+    //los arrays ASOCIATIVOS tienen indices nombrados.
+    $arrayAsociativo = array(1 => 90, 30 => 7, 'e' => 99, 'hola' => 'mundo');
 
-    foreach ($v as $clave => $valor) {
+    foreach ($arrayAsociativo as $clave => $valor) {
             echo "Clave: $clave, Valor: $valor<br/>";
     }
 ?>
