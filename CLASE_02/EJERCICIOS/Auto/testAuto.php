@@ -13,8 +13,8 @@
     ● Utilizar el método de clase “MostrarAuto” para mostrar cada los objetos impares (1, 3,
     5)
  */
-    //Incluyo el archivo
-    include "../Auto/app_17.php";
+    //Incluyo el archivo para utilizar la clase.
+    include "../Auto/Auto.php";
 
     echo "<h1 align=" . "center" .">EJERCICIO 17 (AUTO - POO)</h1>"; 
 
