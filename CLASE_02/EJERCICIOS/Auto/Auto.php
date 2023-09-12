@@ -34,6 +34,13 @@
     #7
     Ejemplo: $importeDouble = Auto::Add($autoUno, $autoDos);
 
+    APLICACIÓN 19:
+    Crear un método de clase para poder hacer el alta de un Auto, guardando los datos en un archivo
+    autos.csv.
+    Hacer los métodos necesarios en la clase Auto para poder leer el listado desde el archivo
+    autos.csv
+    Se deben cargar los datos en un array de autos.
+
     Bessio Rocio Soledad
 */
 
@@ -93,6 +100,100 @@
                 echo "Los autos no pueden sumarse. No coinciden en marca y color!";
                 return 0;
             }
+        }
+
+        /***
+         * Crear un método de clase para poder hacer el alta de un Auto, guardando los datos en un archivo 
+         * autos.csv.
+         * 
+         * #1: Compruebo que lo que recibo sea una instancia de Auto.
+         * #2: Recibo la cadena de texto del metodo que formatea el auto para csv,
+         *     a su vez lo concateno con PHP_EOL que agrega un '\n'.
+         * #3: Abro el archivo y con el puntero al final del mismo. Sino existe lo crea.
+         * #4: Si pudo abrirlo, escribe pasandole el archivo y la cadena de texto del auto,
+         *     luego cierra el archivo y retorna true.
+         */
+        public static function GuardarAutoCSV($auto){
+            if($auto instanceof Auto){//#1
+
+                $informacion = $auto->FormatoCSV() . PHP_EOL;//#2
+
+                //#3
+                $archivoCSV = fopen('autos.csv','a');
+
+                //#4
+                if($archivoCSV !== false){
+                    
+                    fwrite($archivoCSV,$informacion);//-->Escribo en el archivo
+
+                    fclose($archivoCSV);//-->Cierro el archivo.
+
+                    return true;
+                }
+                else
+                    return false;//-->Fallo la carga
+            }
+            return false;
+        }
+
+        /*
+        * Me permitirá manejar el formato de como
+        * guardar el auto.
+        * #1: Primero paso la información del auto a
+        * un array.
+        * #2:Fecha puede ser null, compruebo, le doy un formato, en caso de estar vacia le asigno ''.
+        * #3: Por último el metodo implode convierte elementos de un array a cadena 
+        *     de texto, y separo esa información con el primer param (',') y la retorna.
+        */
+        private function FormatoCSV(){
+            $informacion = array(//#1
+                $this->_marca,
+                $this->_color,
+                $this->_precio,
+                //#2
+                ($this->_fecha !== null) ? $this->_fecha->format('d-m-Y') : ''
+            );
+            return implode(',', $informacion);//#3
+        }
+
+        /*
+        * Hacer los métodos necesarios en la clase Auto para poder leer el listado desde el archivo
+        * autos.csv
+        * #1: Primero me fijo si existe el archivo y si es leible.
+        * #2: Lo abro como lectura
+        * #3: Leo linea por linea con la función fgetcsv pasandole el archivo y parsea de formato csv.
+        * #4: Con la información creo el objeto.
+        * #5: En caso de que la fecha del csv sino esta vacia creo una instancia de datetime asignandoselo, si lo esta
+        *     le asigno null.
+        * #6: Lo agrego al array de autos.
+        */
+        public static function LeerCSV(){
+
+            $autos_array = array();
+
+            if(file_exists('autos.csv') && (is_readable('autos.csv'))){//#1
+                
+                $archivo = fopen('autos.csv','r');//#2
+
+                if($archivo !== false){
+                    
+                    while(($informacion = fgetcsv($archivo)) !== false){//#3
+                        //#4
+                        $auto = new Auto(
+                            $informacion[0],
+                            $informacion[1],
+                            $informacion[2],
+                            !empty($informacion[3]) ? new DateTime($informacion[3]) : null//#5
+                        );
+                        $autos_array[] = $auto;//#6
+                    }
+                }
+                fclose($archivo);
+            }
+            else{ 
+                return "No se puede importar el archivo.<br/>";
+            }
+            return $autos_array;
         }
     }
 ?>

@@ -8,8 +8,8 @@
     Bessio Rocio Soledad
 */
 
-    include "./Garage.php";
-    include "./Auto.php";
+    include_once "../Auto/Garage.php";
+    include_once "../Auto/Auto.php";
 
     echo "<h1 align=" . "center" .">EJERCICIO 18 (testGarage)</h1>"; 
 

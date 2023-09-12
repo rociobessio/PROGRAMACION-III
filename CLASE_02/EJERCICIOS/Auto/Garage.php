@@ -25,6 +25,7 @@
 
     Bessio Rocio Soledad
 */
+        include "../Auto/Auto.php";
 
         class Garage{
             //Atributos
@@ -54,10 +55,12 @@
 
             //Crear el método de instancia “Equals” que permita comparar al objeto de tipo Garaje con un
             //objeto de tipo Auto. Sólo devolverá TRUE si el auto está en el garaje.
-            public function Equals(Auto $auto){
-                foreach($this->_autos as $autoAux){
-                    if ($auto === $autoAux )
-                        return true;
+            public function Equals($auto){
+                if($auto instanceof Auto){//-->Valido si es un Auto.
+                    foreach($this->_autos as $autoAux){
+                        if ($auto === $autoAux )
+                            return true;
+                    }
                 }
                 return false;
             }

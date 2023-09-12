@@ -14,7 +14,7 @@
     5)
  */
     //Incluyo el archivo para utilizar la clase.
-    include "../Auto/Auto.php";
+    include_once "../Auto/Auto.php";
 
     echo "<h1 align=" . "center" .">EJERCICIO 17 (AUTO - POO)</h1>"; 
 
@@ -75,4 +75,29 @@
     Auto::MostrarAuto($auto_Tres);
     echo "<br/>Mostrar #5:";
     Auto::MostrarAuto($auto_Cinco);
-?>
+
+    //EJERCICIO #19 MANEJJO DE ARCHIVOS
+   $result_Uno = Auto::GuardarAutoCSV($auto_Uno);
+
+    if($result_Uno)//-->Guardo en un csv el primer auto{
+    {
+      echo "<br/><hr/>Pudo guardar el auto en el archivo CSV.<br/>";
+    }
+    else
+      echo "<br/><hr/>NO se pudo guardar el auto en el archivo CSV.<br/>";
+
+   
+   $result_Dos = Auto::GuardarAutoCSV($auto_Cinco);
+
+    if($result_Dos)//-->Guardo en un csv el primer auto{
+    {
+      echo "<br/><hr/>Pudo guardar el auto en el archivo CSV.<br/>";
+    }
+    else
+      echo "<br/><hr/>NO se pudo guardar el auto en el archivo CSV.<br/>";
+
+   echo "<br/><hr/>LECTURA DE ARCHIVO CSV:<br/>";
+   $listaAutosCSV = Auto::LeerCSV();
+   foreach($listaAutosCSV as $key => $autosGarage){
+      Auto::MostrarAuto($autosGarage);
+   }
