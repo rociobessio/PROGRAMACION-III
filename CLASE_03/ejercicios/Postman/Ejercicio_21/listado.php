@@ -37,21 +37,20 @@
 
         if(isset($_GET['listadoUsuarios'])){//#3
             
-            $listadoUsuarios = $_GET['listadoUsuarios'];
+            $listadoUsuarios = $_GET['listadoUsuarios'];  
 
             if($listadoUsuarios === 'usuarios'){
                 $usuarios = Usuario::CargarUsuariosCSV('usuarios.csv');//#4
     
                 if(count($usuarios) > 0){//#5
                     //#6
-                    $cadena = '<ul>' . PHP_EOL;
+                    echo '<ul>' . PHP_EOL;
     
                     foreach($usuarios as $usuario){
-                        $cadena .= '<li>' . $usuario->getNombre() . ' - '. $usuario->getMail() . ' - ' . $usuario->getClave() . '</li>' . PHP_EOL;
+                        echo '<li>' . $usuario->getNombre() . ' - '. $usuario->getMail() . '</li>';
                     }
-                    $cadena .= '</ul>' . PHP_EOL;
-
-                    echo $cadena;
+                    
+                    echo '</ul>' . PHP_EOL; 
                 }
                 else
                     echo "[No Hay nada dentro del archivo!]<br>"; 

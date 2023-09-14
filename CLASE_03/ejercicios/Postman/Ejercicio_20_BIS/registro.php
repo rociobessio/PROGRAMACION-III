@@ -30,7 +30,7 @@
      * #6: Llamo al metodo estatico y agrego en el csv al usuario
      */
     if($_SERVER['REQUEST_METHOD'] === 'POST'){//#1
-        if(isset($_POST["nombre"]) && isset($_POST["clave"]) && isset($_POST["mail"])){//#2
+        if(isset($_POST['nombre']) && isset($_POST['clave']) && isset($_POST['mail'])){//#2
             //#3
             $nombreUsuario = $_POST['nombre'];
             $claveUsuario = $_POST['clave'];
@@ -43,7 +43,7 @@
                 echo "<br>[La dirección de correo electronico ingresada es incorrecta!]</br>";
             else{
                 //#6
-                if(Usuario::GuardarUsuarioCSV(new Usuario($nombreUsuario,$claveUsuario,$mailUsuario))){
+                if(Usuario::GuardarUsuarioCSV(new Usuario($claveUsuario,$mailUsuario,$nombreUsuario))){
                     echo "[El usuario fue agregado correctamente!]<br>";
                 }
                 else{

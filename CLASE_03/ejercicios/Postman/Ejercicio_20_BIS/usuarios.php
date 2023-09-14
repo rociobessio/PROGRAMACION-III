@@ -18,7 +18,7 @@
         private $_clave;
         private $_mail;
 
-        public function __construct($nombre = "",$clave,$mail)
+        public function __construct($clave,$mail,$nombre = "")
         {
             $this->_nombre = $nombre;
             $this->_clave = $clave;
@@ -51,7 +51,7 @@
          * como csv en una cadena de texto para luego retornarla.
          */
         private function FormatearCSV(){ 
-            return $this->_nombre . ',' . $this->_mail . ',' . $this->_clave;
+            return   $this->_clave . ',' . $this->_mail . ',' . $this->_nombre . PHP_EOL;
         }
 
         /**
@@ -71,13 +71,13 @@
          */
         public static function GuardarUsuarioCSV($usuario){
             if($usuario instanceof Usuario){//#1
-                $informacion = $usuario->FormatearCSV() . PHP_EOL;//#2
+                $informacion = $usuario->FormatearCSV();//#2
 
                 $archivo = fopen('usuarios.csv','a');
 
                 if($archivo !== false){
 
-                    fwrite($archivo,$informacion);//#4
+                    fwrite($archivo, $informacion) . PHP_EOL;//#4
 
                     fclose($archivo);//#5
 
@@ -103,25 +103,42 @@
          */
         public static function CargarUsuariosCSV($nombreArchivo){
             $usuariosArray = array();//#1
-        
             if(file_exists($nombreArchivo) && (is_readable($nombreArchivo))){//#2
                 $archivo = fopen($nombreArchivo,'r');
-
                 if($archivo !== false){
-
                     while(($informacion = fgetcsv($archivo)) !== false){//#3
                         $usuariosArray[] = new Usuario(//#4
                             $informacion[0],
                             $informacion[1],
                             $informacion[2]
                         );
-                    }
-
+                   
                     fclose($archivo);//#5
+                    }
                 }
             }
             return $usuariosArray;//#6
         }
+
+     public static function cargarUsuariosDesdeCSV($csvFile)
+     {
+         $usuarios = []; // Inicializo una lista array vacia para almacenar los usuarios
+  
+         if (file_exists($csvFile)) {
+            $lines = file($csvFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+             foreach ($lines as $line) {
+                 $data = explode(',', $line);
+                 if (count($data) === 3) {
+                     $clave = $data[0];
+                     $mail = $data[1];
+                    $nombre = $data[2];
+                     $usuarios[] = ['clave' => $clave, 'mail' => $mail,'nombre' => $nombre];
+                 }
+             }
+         }
+         return $usuarios;
+     }
+
 
         /**
          * Verificar si es un usuario registrado, Retorna
@@ -138,20 +155,38 @@
          *     NO esta registrado.
          */
         public function Equals($listaUsuarios){
-            if(!($listaUsuarios == null) && !empty($listaUsuarios)){
+            if(!($listaUsuarios == null) && !empty($listaUsuarios)
+               && (is_array($listaUsuarios))){
+
                 foreach ($listaUsuarios as $usuario) {
-                    if ($usuario->_mail === $this->_mail) {
-                        if ($usuario->_clave === $this->_clave) { //#3
-                            return "[Usuario verificado!]";
-                        } else {
-                            return "[Error en los datos ingresados!]";
+
+                    if($usuario instanceof Usuario){
+                        if ($usuario->_mail === $this->_mail) {
+                            if ($usuario->_clave === $this->_clave) { //#3
+                                return "[Usuario verificado!]";
+                            } else {
+                                return "[Error en los datos ingresados!]";
+                            }
                         }
                     }
                 }
             }
             return "[Usuario NO registrado!]";
         }
+    
+    
+        public function Verificar($mail,$clave){
+            $usuarios = Usuario::cargarUsuariosDesdeCSV('usuarios.csv');
+
+            foreach($usuarios as $usuario){
+                if ($usuario['mail'] === $mail) {
+                    if ($usuario['clave'] === $clave) { //#3
+                        return "[Usuario verificado!]";
+                    } else {
+                        return "[Error en los datos ingresados!]";
+                    }
+                }
+            }
+            return "[Usuario NO registrado!]";
+        }
     }
-
-
-?>

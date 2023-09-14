@@ -29,11 +29,13 @@
      * #3: Creo el usuario y me fijo si esta registrado
      */
     if($_SERVER['REQUEST_METHOD'] === 'POST'){//#1
-        if(isset($_POST["clave"]) && isset($_POST["mail"])){//#2
+        if(isset($_POST['clave']) && isset($_POST['mail'])){//#2
             //#3
-            $usuarioRegistrado = new Usuario("",$_POST['clave'],$_POST['mail']);
-
-            $resultado = $usuarioRegistrado->Equals(Usuario::CargarUsuariosCSV('usuarios.csv'));
+            $clave = $_POST['clave'];
+            $mail = $_POST['mail'];
+            $usuarioRegistrado = new Usuario($mail,$clave);
+            
+            $resultado = $usuarioRegistrado->Verificar($mail,$clave);
 
             echo $resultado;
         }
