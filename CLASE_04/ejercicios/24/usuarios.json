@@ -1,0 +1,82 @@
+[
+    {
+        "id": 7133,
+        "nombre": "martin",
+        "mail": "martin@outlook.com",
+        "clave": "45678",
+        "registro": "2023-09-19",
+        "img": null
+    },
+    {
+        "id": 7139,
+        "nombre": "martin",
+        "mail": "martin@outlook.com",
+        "clave": "45678",
+        "registro": "2023-09-19",
+        "img": null
+    },
+    {
+        "id": 6770,
+        "nombre": "rocio",
+        "mail": "rocio@outlook.com",
+        "clave": "921312",
+        "registro": "2023-09-19",
+        "img": null
+    },
+    {
+        "id": 6474,
+        "nombre": "paula",
+        "mail": "paula@outlook.com",
+        "clave": "2313",
+        "registro": "2023-09-19",
+        "img": "C:\\xampp\\htdocs\\PROGRAMACION-III\\CLASE_04\\ejercicios\\23\\Usuario\\Fotosdesktop-wallpaper-1920x1080-8-bit-city-laptop-full-backgrounds-and-japan-8-bit.jpg"
+    },
+    {
+        "id": 5914,
+        "nombre": "claudia",
+        "mail": "claus@gmail.com",
+        "clave": "2313",
+        "registro": "2023-09-19",
+        "img": "C:\\xampp\\htdocs\\PROGRAMACION-III\\CLASE_04\\ejercicios\\23\\Usuario\\Fotos\\desktop-wallpaper-1920x1080-8-bit-city-laptop-full-backgrounds-and-japan-8-bit.jpg"
+    },
+    {
+        "id": null,
+        "nombre": null,
+        "mail": null,
+        "clave": null,
+        "registro": null,
+        "img": null
+    },
+    {
+        "id": 7300,
+        "nombre": "gaston",
+        "mail": "cgas@gmail.com",
+        "clave": "2313",
+        "registro": "2023-09-19",
+        "img": "C:\\xampp\\htdocs\\PROGRAMACION-III\\CLASE_04\\ejercicios\\23\\Usuario\\Fotos\\pixel-art-town-city-waneella-hd-wallpaper-preview.jpg"
+    },
+    {
+        "id": 4116,
+        "nombre": "maria",
+        "mail": "mariaPaula@gmail.com",
+        "clave": "2313",
+        "registro": "2023-09-19",
+        "img": "C:\\xampp\\htdocs\\PROGRAMACION-III\\CLASE_04\\ejercicios\\23\\Usuario\\Fotos\\pixel-art-town-city-waneella-hd-wallpaper-preview.jpg"
+    },
+    {
+        "id": 5700,
+        "nombre": "maria",
+        "mail": "mariaPaula@gmail.com",
+        "clave": "2313",
+        "registro": "2023-09-19 23:09:21",
+        "img": "C:\\xampp\\htdocs\\PROGRAMACION-III\\CLASE_04\\ejercicios\\23\\Usuario\\Fotos\\pixel-art-town-city-waneella-hd-wallpaper-preview.jpg"
+    },
+    {
+        "id": 7655,
+        "nombre": "daniel",
+        "mail": "daniel@gmail.com",
+        "clave": "12311",
+        "registro": "2023-09-19 23:09:33",
+        "img": "..\\23\\Usuario\\Fotos\\178626970.jpg"
+    }
+]
