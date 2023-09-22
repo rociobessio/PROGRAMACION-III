@@ -1,0 +1,26 @@
+[
+    {
+        "id": 861,
+        "codBarra": "123456",
+        "nombre": "Samsung S9",
+        "tipo": "Electronica",
+        "stock": 10,
+        "precio": 50000
+    },
+    {
+        "id": 861,
+        "codBarra": "123456",
+        "nombre": "Samsung S9",
+        "tipo": "Electronica",
+        "stock": 10,
+        "precio": 50000
+    },
+    {
+        "id": 1200,
+        "codBarra": "891081",
+        "nombre": "Keyboard MXX",
+        "tipo": "Electronica",
+        "stock": 8,
+        "precio": 21000
+    }
+]

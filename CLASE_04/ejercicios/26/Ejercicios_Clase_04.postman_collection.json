@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "b6d3d62b-834b-45c1-8087-e014b1ee700b",
+		"name": "Ejercicios_Clase_04",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24011357"
+	},
+	"item": [
+		{
+			"name": "Realizar_Venta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "codBarra",
+							"value": "891081",
+							"type": "text"
+						},
+						{
+							"key": "idUsuario",
+							"value": "6474",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/PROGRAMACION-III/CLASE_04/ejercicios/26/RealizarVenta.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"PROGRAMACION-III",
+						"CLASE_04",
+						"ejercicios",
+						"26",
+						"RealizarVenta.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
