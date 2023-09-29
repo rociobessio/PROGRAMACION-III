@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "sabor": "Frutilla",
+        "tipo": "Agua",
+        "vaso": "Cucurucho",
+        "precio": 700,
+        "stock": 6,
+        "imagen": ""
+    },
+    {
+        "id": 2,
+        "sabor": "Dulce de Leche",
+        "tipo": "Crema",
+        "vaso": "Cucurucho",
+        "precio": 1000,
+        "stock": 15,
+        "imagen": ".\/ImagenesDeHelados\/2023\/Dulce de Leche_Crema_6515d1a7c6ae2.jpg"
+    },
+    {
+        "id": 3,
+        "sabor": "Chocolate",
+        "tipo": "Crema",
+        "vaso": "Cucurucho",
+        "precio": 1000,
+        "stock": 3,
+        "imagen": ".\/ImagenesDeHelados\/2023\/Chocolate_Crema_6515d5be63679.jpg"
+    },
+    {
+        "id": 4,
+        "sabor": "Maracuya",
+        "tipo": "Agua",
+        "vaso": "Plastico",
+        "precio": 1000,
+        "stock": 12,
+        "imagen": ".\/ImagenesDeHelados\/2023\/Maracuya_Agua_6515e43fb8b38.jpg"
+    }
+]

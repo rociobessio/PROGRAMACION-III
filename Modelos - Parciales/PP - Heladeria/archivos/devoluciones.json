@@ -1,0 +1,17 @@
+[
+    {
+        "numero_pedido": 1423432,
+        "causa_devolucion": "El helado estaba vacio",
+        "imagen_devolucion": ""
+    },
+    {
+        "numero_pedido": 155644,
+        "causa_devolucion": "el helado llego frio",
+        "imagen_devolucion": ".\/ImagenesDevolucion\/2023\/155644_el helado llego frio_65164354cef07.jpg"
+    },
+    {
+        "numero_pedido": 155644,
+        "causa_devolucion": "el helado llego frio",
+        "imagen_devolucion": ".\/ImagenesDevolucion\/2023\/155644_el helado llego frio_65164428d84b5.jpg"
+    }
+]
