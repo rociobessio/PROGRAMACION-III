@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "tipo": "Molde",
+        "sabor": "margarita",
+        "precio": 2000,
+        "cantidad": 34
+    },
+    {
+        "id": 2,
+        "tipo": "Piedra",
+        "sabor": "Mediterranea",
+        "precio": 4700,
+        "cantidad": 22
+    },
+    {
+        "id": 3,
+        "tipo": "piedra",
+        "sabor": "Muzzarella",
+        "precio": 4000,
+        "cantidad": 24,
+        "imagen": "Muzzarella_piedra_6519a39f059bb.jpg"
+    }
+]
