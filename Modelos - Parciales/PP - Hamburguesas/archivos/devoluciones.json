@@ -1,0 +1,38 @@
+[
+    {
+        "id": "6518a07a94813",
+        "numero_pedido": 127434,
+        "causa_devolucion": "Llego fria la hamburguesa",
+        "imagen_devolucion": "..\/ImagenesDevolucion\/2023\/127434_Llego fria la hamburguesa_6518a07a9468f.jpg"
+    },
+    {
+        "id": "6518a0c746c2d",
+        "numero_pedido": 127434,
+        "causa_devolucion": "Llego fria la hamburguesa",
+        "imagen_devolucion": "..\/ImagenesDeDevolucion\/2023\/127434_Llego fria la hamburguesa_6518a0c746b11.jpg"
+    },
+    {
+        "id": "6518a5f8add3b",
+        "numero_pedido": 147074,
+        "causa_devolucion": "Vino sin ketchup",
+        "imagen_devolucion": "..\/ImagenesDeDevolucion\/2023\/147074_Vino sin ketchup_6518a5f8adb62.jpg"
+    },
+    {
+        "id": "6518abfd52756",
+        "numero_pedido": 113269,
+        "causa_devolucion": "Vino sin ketchup",
+        "imagen_devolucion": "..\/ImagenesDeDevolucion\/2023\/113269_Vino sin ketchup_6518abfd525cf.jpg"
+    },
+    {
+        "id": "6518ad7b531eb",
+        "numero_pedido": 135840,
+        "causa_devolucion": "Llego sin papas",
+        "imagen_devolucion": "..\/ImagenesDeDevolucion\/2023\/135840_Llego sin papas_6518ad7b53110.jpg"
+    },
+    {
+        "id": "6518b2e40a5c9",
+        "numero_pedido": 161218,
+        "causa_devolucion": "La coca cola estaba sin hielo",
+        "imagen_devolucion": "..\/ImagenesDeDevolucion\/2023\/161218_La coca cola estaba sin hielo_6518b2e40a461.jpg"
+    }
+]

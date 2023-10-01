@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "nombre": "big mc",
+        "tipo": "Simple",
+        "aderezo": "Mostaza",
+        "precio": 1200,
+        "cantidad": 0,
+        "imagen_hamburguesa": "..\/ImagenesDeHamburguesas\/2023\/big mc_Simple_6518accec5f68.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "maneater",
+        "tipo": "Doble",
+        "aderezo": "Ketchup",
+        "precio": 1500,
+        "cantidad": 12,
+        "imagen_hamburguesa": "..\/ImagenesDeHamburguesas\/2023\/maneater_Doble_6518acf50b1b3.jpg"
+    }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "id": "6518a0c746c2e",
+        "devolucion_id": "6518a0c746c2d",
+        "porcentajeDescuento": 10,
+        "estado": "usado",
+        "vencimiento": "2023-10-01"
+    },
+    {
+        "id": "6518a5f8add43",
+        "devolucion_id": "6518a5f8add3b",
+        "porcentajeDescuento": 10,
+        "estado": "no usado",
+        "vencimiento": "2023-09-04"
+    },
+    {
+        "id": "6518abfd52759",
+        "devolucion_id": "6518abfd52756",
+        "porcentajeDescuento": 10,
+        "estado": "usado",
+        "vencimiento": "2023-10-04"
+    },
+    {
+        "id": "6518ad7b531ed",
+        "devolucion_id": "6518ad7b531eb",
+        "porcentajeDescuento": 10,
+        "estado": "usado",
+        "vencimiento": "2023-10-04"
+    },
+    {
+        "id": "6518b2e40a5cb",
+        "devolucion_id": "6518b2e40a5c9",
+        "porcentajeDescuento": 10,
+        "estado": "usado",
+        "vencimiento": "2023-10-04"
+    }
+]
