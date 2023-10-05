@@ -2,6 +2,7 @@
 
     require_once "../clases/Producto.php";
     require_once "../clases/Venta.php";
+    require_once "../clases/Archivo.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if(isset($_POST['numeroPedido']) && isset($_POST['causaDevolucion']) && isset($_FILES['imagenCliente'])){
@@ -13,7 +14,7 @@
             $jsonfileCupones = '../archivos/cupones.json';
             $jsonfileDevoluciones = '../archivos/devoluciones.json';
 
-            $ventas = Venta::ObtenerArray($jsonfile);//-->Traigo el array
+            $ventas = Archivo::ObtenerArray($jsonfile);//-->Traigo el array
             $directorioImagenes = '../ImagenesDeDevolucion/2023/';
             $ventaEncontrada = Venta::BuscarVenta($ventas,$numeroPedido);
 
@@ -23,7 +24,7 @@
                     $nombreImg = $numeroPedido . '_' . $causaDevolucion . '_' . uniqid() . '.jpg' ;  
                     $rutaImg = $directorioImagenes . $nombreImg; 
 
-                    $devoluciones = Venta::ObtenerArray('../archivos/devoluciones.json');
+                    $devoluciones = Archivo::ObtenerArray('../archivos/devoluciones.json');
 
                     // if($devoluciones !== null){
                         $nuevaDevolucion = [

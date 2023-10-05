@@ -45,7 +45,7 @@
         public static function BuscarProducto($productos,$nombre,$tipo){
             if($productos !== null){
                 foreach ($productos as $producto) {
-                     //var_dump($hamburguesa);
+                     var_dump($producto);
                     if($producto['nombre'] === $nombre && $producto['tipo'] === $tipo){
                         return $producto;
                     }

@@ -1,10 +1,13 @@
 <?php
 
+    require_once "Archivo.php";
+
     /**
      * Esta clase me ayudará
      * con el manejo de las ventas.
      */
     class Venta{ 
+
 
         /**
          * Me permite buscar una venta en el
@@ -18,7 +21,7 @@
          */
         public static function BuscarVenta($ventas,$numeroPedido){
             foreach ($ventas as &$venta) {
-                if ($venta["numero_pedido"] === $numeroPedido) {
+                if ($venta["numeroPedido"] === $numeroPedido) {
                     return $venta;
                 }
             }
@@ -70,7 +73,7 @@
          */
         public static function BuscarCuponDescuento($cuponID){
             $json_file = '../archivos/cupones.json';
-            $cupones = Venta::ObtenerArray($json_file);
+            $cupones = Archivo::ObtenerArray($json_file);
 
             foreach ($cupones as &$cupon) {
                 if ($cupon["id"] === $cuponID) {
@@ -78,23 +81,6 @@
                 }
             }
             return null;
-        }
-
-        /**
-         * funcion generalizada para poder obtener
-         * un array de objetos de un json.
-         * 
-         * @param jsonFile el path del archivo.
-         * @return array el array de los objetos.
-         */
-        public static function ObtenerArray($jsonFile){
-            $arrayObjetos = array();
-
-            if(file_exists($jsonFile)){
-                $contenido = file_get_contents($jsonFile);
-                $arrayObjetos = json_decode($contenido,true);
-            }
-            return $arrayObjetos;
         }
 
         /**
@@ -112,15 +98,15 @@
          * @return bool si pudo realizarse la venta true, sino false.
          */
         public static function GenerarVenta($email,$nombreUsuario,$ProductoExistente,$cantidad,$total,$img=null,$importeFinal=null){
-            $json_file = '../archivos/ventas.json';
-            $ventas = Venta::ObtenerArray($json_file);
+            $json_file = './archivos/ventas.json';
+            $ventas = Archivo::ObtenerArray($json_file);
 
             $nuevaVenta = [
-                'id' => count($ventas) > 0 ? count($ventas) + 1 : 1,
+                'id' => empty($ventas) ? 1 : (count($ventas) + 1),
                 'fecha' => (new DateTime('now'))->format('Y-m-d'),
                 'numero_pedido' => mt_rand(1,190000),
                 'cantidad' => intval($cantidad),
-                'nombre_hamburguesa' => $ProductoExistente['nombre'],
+                'nombre_producto' => $ProductoExistente['nombre'],
                 'tipo' => $ProductoExistente['tipo'],
                 'aderezo' => $ProductoExistente['aderezo'],
                 'total' => $total,
@@ -142,7 +128,7 @@
                 $posicionArroba = strpos($email, "@");
                 $stringFinal = substr($email, 0, $posicionArroba);
                 $nombreImagen = $ProductoExistente['nombre'] . '_' . $ProductoExistente['tipo'] . '_' . $ProductoExistente['aderezo'] . '_' .  $stringFinal . '_' . (new DateTime('now'))->format('Y-m-d') . '.jpg';
-                $directorioImagenesVenta = '../ImagenesDeVentas/2023/';
+                $directorioImagenesVenta = './ImagenesDeVentas/2023/';
                 $rutaImagenVenta = $directorioImagenesVenta . $nombreImagen;
                 
                 if($img !== null){

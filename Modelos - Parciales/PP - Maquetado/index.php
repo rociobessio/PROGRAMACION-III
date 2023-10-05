@@ -19,7 +19,7 @@ switch($_SERVER['REQUEST_METHOD']){
         if(isset($_POST['accion'])){
             switch ($_POST['accion']) {
                 case 'Alta_Producto':
-                    require_once "aplicacion/ProductoCarga.php";
+                    require_once "aplicacion/ProductosCarga.php";
                 break;
                 case 'Consultar_Producto':
                     require_once "aplicacion/ProductoConsultar.php";

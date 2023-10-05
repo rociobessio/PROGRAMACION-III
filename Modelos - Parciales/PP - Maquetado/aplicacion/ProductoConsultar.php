@@ -1,6 +1,7 @@
 <?php
-    require_once "../clases/Producto.php";
-    require_once "../clases/Venta.php";
+    require_once "./clases/Producto.php";
+    require_once "./clases/Venta.php";
+    require_once "./clases/Archivo.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         //-->Puede variar segun el producto.
@@ -8,8 +9,9 @@
             $nombre = $_POST['nombre'] ;
             $tipo = $_POST['tipo'];
 
-            $jsonFile = '../archivos/hamburguesas.json';
-            $productos = Venta::ObtenerArray($jsonFile);
+            $jsonFile = './archivos/productos.json';
+            $productos = Archivo::ObtenerArray($jsonFile);
+            // var_dump($productos);
 
             $existe = Producto::BuscarProducto($productos,$nombre,$tipo);
 

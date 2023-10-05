@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "nombre": "empanada",
+        "tipo": "carne",
+        "aderezo": "no",
+        "precio": 1200,
+        "cantidad": 24,
+        "imagen": ".\/ImagenesDeProductos\/2023\/empanada_carne_651e010768f01.jpg"
+    }
+]

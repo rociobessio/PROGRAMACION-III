@@ -1,21 +1,19 @@
 <?php
 
-    require_once "../clases/Venta.php";
-    require_once "../clases/Producto.php";
+    require_once "./clases/Venta.php";
+    require_once "./clases/Producto.php";
+    require_once "./clases/Archivo.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        if(isset($_POST['email_usuario']) && isset($_POST['nombre_usuario']) && 
-        isset($_POST['tipo']) && isset($_POST['aderezo']) && isset($_POST['cantidad']) &&
-        isset($_POST['nombre']) && isset($_FILES['imagen_producto'])){
-            $email_usuario = $_POST['email_usuario'];
-            $nombre_usuario = $_POST['nombre_usuario'];
+        if(isset($_POST['emailUsuario']) && isset($_POST['tipo']) && isset($_POST['sabor']) &&
+             isset($_POST['cantidad']) && isset($_FILES['imagenProducto'])){
+            $email_usuario = $_POST['emailUsuario']; 
             $tipo = $_POST['tipo'];
-            $aderezo = $_POST['aderezo'];
-            $cantidad = $_POST['cantidad'];
-            $nombre = $_POST['nombre'];
-            $imagen = $_FILES['imagen_producto'];
+            $sabor = $_POST['sabor'];//-->Puede variar
+            $cantidad = $_POST['cantidad']; 
+            $imagen = $_FILES['imagenProducto'];
 
-            if (RealizarVenta($email_usuario, $nombre_usuario, $tipo, $aderezo, $cantidad, $nombre, $imagen)) {
+            if (RealizarVenta($email_usuario, $tipo, $sabor, $cantidad, $imagen = null)) {
                 echo "[Venta guardada correctamente!]";
                 echo "[Stock actualizado!]";
             } else {
@@ -32,12 +30,12 @@
      * 
      * @return bool true si pudo, false sino.
      */
-    function RealizarVenta($email_usuario, $nombre_usuario, $tipo, $aderezo, $cantidad, $nombre, $imagen){
-        $jsonFileProductos = '../archivos/productos.json';
-        $jsonFileCupones = '../archivos/cupones.json';
+    function RealizarVenta($email_usuario, $tipo, $sabor, $cantidad,$imagen =null){
+        $jsonFileProductos = './archivos/productos.json';
+        $jsonFileCupones = './archivos/cupones.json';
 
-        $productos = Venta::ObtenerArray($jsonFileProductos);
-        $productoExistente = Producto::BuscarProducto($productos, $nombre, $tipo);
+        $productos = Archivo::ObtenerArray($jsonFileProductos);
+        $productoExistente = Producto::BuscarProducto($productos, $sabor, $tipo);
 
         if ($productoExistente !== null) {
             if (Producto::verificarStock($productoExistente, $cantidad)) {
@@ -54,9 +52,9 @@
                         $descuento = Venta::CalcularDescuento($productoExistente['precio'], $cuponEncontrado);
                         $importeFinal = $montoOriginal - $descuento;
 
-                        if (Venta::GenerarVenta($email_usuario, $nombre_usuario, $productoExistente, $cantidad, $montoOriginal, $imagen, $importeFinal)) {
+                        if (Venta::GenerarVenta($email_usuario, $productoExistente, $cantidad, $montoOriginal, $imagen, $importeFinal)) {
                             
-                            $cupones = Venta::ObtenerArray($jsonFileCupones);
+                            $cupones = Archivo::ObtenerArray($jsonFileCupones);
                             
                             //-->Actualizo el estado, dependiendo no es necesario.
                             foreach ($cupones as &$cupon) {
@@ -82,7 +80,7 @@
                     }
                 }
                 else{//-->Si no hay cupon es venta sin descuento.
-                    if (Venta::GenerarVenta($email_usuario, $nombre_usuario, $productoExistente, $cantidad, $montoOriginal, $imagen)) {
+                    if (Venta::GenerarVenta($email_usuario, $productoExistente, $cantidad, $montoOriginal, $imagen)) {
                         Producto::ActualizarProducto($productos, $productoExistente, $jsonFileProductos);
                         return true;
                     }
