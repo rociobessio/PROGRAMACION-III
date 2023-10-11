@@ -1,72 +1,68 @@
 <?php
-/**
- * Parte 01
- * (1 pt.) index.php:
- * Recibe todas las peticiones que realiza el postman, y administra a qué archivo se debe incluir.
- */
-switch($_SERVER['REQUEST_METHOD']){
-    case 'GET':
-        if(isset($_GET['accion'])){
-            switch ($_GET['accion']) {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (isset($_GET['accion'])) {
+            switch ($_GET['accion']) { 
                 case 'Consultar_Ventas':
-                    require_once "PARTE01/ConsultasVentas.php";
+                    require_once "PARTE03/ConsultasVentas.php";
                 break;
                 case 'Alta_Pizza':
                     require_once "PARTE01/PizzaCarga.php";
                 break;
                 default:
-                    echo json_encode(['error' => 'Metodo GET no permitido']);
+                    echo json_encode(['error' => 'Accion GET no permitido']);
                 break;
             }
+        } else {
+            echo json_encode(['error' => 'Falta el parametro accion']);
         }
-    break;
-
-    case 'POST':
-        if(isset($_POST['accion'])){
-            switch ($_POST['accion']) {
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_GET['accion'])) {
+            switch ($_GET['accion']) {
                 case 'Consultar_Pizza':
                     require_once "PARTE01/PizzaConsultar.php";
+                break;
+            case 'Alta_Pizza':
+                    require_once "PARTE04/PizzaCarga.php";
                 break;
                 case 'Alta_Venta':
                     require_once "PARTE02/AltaVenta.php";
                 break;
-                case 'Devolver_Producto':
-                    require_once "aplicacion/DevolverProducto.php";
-                break;
                 default:
-                    echo json_encode(['error' => 'Metodo POST no permitido']);
+                    echo json_encode(['error' => 'Accion POST no permitido']);
                 break;
             }
+        } else {
+            echo json_encode(['error' => 'Falta el parametro accion']);
         }
-    break;
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
-    case 'PUT':
-        if(isset($_POST['accion'])){
-            switch ($_POST['accion']) {
-                case 'Modificar_Producto':
-
+        if (isset($_GET['accion'])) {
+            switch ($_GET['accion']) {
+                case 'ModificarVenta':
+                    include_once "PARTE04/ModificarVenta.php";
                 break;
                 default:
-                    echo json_encode(['error' => 'Metodo PUT no permitido']);
+                    echo json_encode(['error' => 'Accion PUT no valida']);
                 break;
             }
+        } else {
+            echo json_encode(['error' => 'Falta el parametro accion']);
         }
-    break;
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
-    case 'DELETE':
-        if(isset($_POST['accion'])){
-            switch ($_POST['accion']) {
-                case 'Eliminar_Producto':
-
+        if (isset($_GET['accion'])) {
+            switch ($_GET['accion']) {
+                case 'EliminarVenta':
+                    include_once "PARTE04/BorrarVenta.php";
                 break;
                 default:
-                    echo json_encode(['error' => 'Metodo DELETE no permitido']);
+                    echo json_encode(['error' => 'Accion DELETE no valida']);
                 break;
             }
+        } else {
+            echo json_encode(['error' => 'Falta el parametro accion']);
         }
-    break;
-    //-->Devuelvo un estandar
-    default:
+    } else {
         echo json_encode(['error' => 'Metodo HTTP no permitido']);
-    break;
- }
+    }

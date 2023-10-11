@@ -12,7 +12,7 @@
         "_sabor": "anchoas",
         "_precio": 2700,
         "_tipo": "piedra",
-        "_cantidad": 10,
+        "_cantidad": 4,
         "_imagen": ""
     },
     {
@@ -20,7 +20,7 @@
         "_sabor": "provoletta",
         "_precio": 2500,
         "_tipo": "piedra",
-        "_cantidad": 12,
+        "_cantidad": 10,
         "_imagen": "sada"
     },
     {
@@ -38,5 +38,21 @@
         "_tipo": "piedra",
         "_cantidad": 7,
         "_imagen": "opqa"
+    },
+    {
+        "_id": 6,
+        "_sabor": "jamon",
+        "_precio": 2000,
+        "_tipo": "molde",
+        "_cantidad": 7,
+        "_imagen": ".\/ImagenesDePizzas\/jamon_molde_6526b6e745c44.jpg"
+    },
+    {
+        "_id": 7,
+        "_sabor": "huevo frito",
+        "_precio": 3000,
+        "_tipo": "molde",
+        "_cantidad": 12,
+        "_imagen": ".\/ImagenesDePizzas\/huevo frito_molde_6526f551d498f.jpg"
     }
 ]

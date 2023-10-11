@@ -12,13 +12,35 @@
     },
     {
         "_idVenta": 2,
-        "_emailUsuario": "rocibessio@gmail.com",
+        "_emailUsuario": "agustin43@outlook.com.ar",
         "_fechaVenta": "2023-10-11",
-        "_sabor": "margarita",
+        "_sabor": "jamon",
         "_tipo": "molde",
         "_totalVenta": 4600,
         "_cantidad": 2,
         "_imagenVenta": ".\/ImagenesDeVentas\/2023\/molde_margarita_rocibessio_2023-10-11.jpg",
         "_numeroPedido": 7023
+    },
+    {
+        "_idVenta": 3,
+        "_emailUsuario": "manuelervd@gmail.com",
+        "_fechaVenta": "2023-10-11",
+        "_sabor": "anchoas",
+        "_tipo": "piedra",
+        "_totalVenta": 13500,
+        "_cantidad": 5,
+        "_imagenVenta": ".\/ImagenesDeVentas\/2023\/piedra_anchoas_manuelervd_2023-10-11.jpg",
+        "_numeroPedido": 5852
+    },
+    {
+        "_idVenta": 4,
+        "_emailUsuario": "estebi604@gmail.com",
+        "_fechaVenta": "2023-10-11",
+        "_sabor": "provoletta",
+        "_tipo": "piedra",
+        "_totalVenta": 5000,
+        "_cantidad": 2,
+        "_imagenVenta": ".\/ImagenesDeVentas\/2023\/piedra_provoletta_estebi604_2023-10-11.jpg",
+        "_numeroPedido": 4191
     }
 ]

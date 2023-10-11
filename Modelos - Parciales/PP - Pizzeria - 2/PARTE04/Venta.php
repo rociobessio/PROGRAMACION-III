@@ -99,6 +99,77 @@
         }
 //********************************************* FUNCIONES *********************************************
         /**
+         * Me permitirá eliminar una venta del archivo JSON.
+         * 
+         * @param int el numero de pedido a eliminar.
+         * 
+         * @return bool true si pudo eliminar correctamente,
+         * false sino.
+         */
+        public static function EliminarVenta($numeroPedido){
+            $ventas = Venta::LeerJSON('./archivos/ventas.json');
+            // var_dump($ventas);
+            $venta = Venta::BuscarVenta($ventas,$numeroPedido);
+            // var_dump($venta);
+            
+
+            if($venta !== null){//-->Existe
+
+                $rutaFoto = $venta->getImagen(); //-->Obtiene la ruta de la foto de la venta
+                $nombreFoto = basename($rutaFoto); //-->Obtiene el nombre de la foto
+                $directorioBackup = './BackupVentas/';
+                $rutaBackup = $directorioBackup . $nombreFoto;
+
+                if (rename($rutaFoto, $rutaBackup)) {//-->Muevo la foto
+                    $key = array_search($venta,$ventas);//-->Busco su key para luego actualizarla
+                    unset($ventas[$key]);//-->Con la key lo saco del array
+                    if(Venta::GuardarJSON($ventas,'./archivos/ventas.json')){//-->Actualizo el JSON
+                        return true;
+                    }else {
+                        //-->Si no guardo el json vuelve la imagen al lugar original
+                        rename($rutaBackup, $rutaFoto);
+                        return false;
+                    }
+                }
+            }
+            else
+                return false;//-->No existe el numero de pedido.
+        }
+
+        /**
+         * Esta funcion estatica me permitira modificar una venta  en
+         * el archiov JSON.
+         * 
+         * @param int el numero del pedido solicitado
+         * @param string el sabor del producto
+         * @param string el tipo del producto
+         * @param int cantidad a modificar del producto
+         * @param string el email del usuario a modificar
+         * 
+         * @return bool true si pudo realizarse la moficiacion,
+         * false sino.
+         */
+        public static function ModificarVenta($numeroPedido,$sabor,$tipo,$cantidad,$emailUsuario){
+            $ventas = Venta::LeerJSON('./archivos/ventas.json');
+            $venta = Venta::BuscarVenta($ventas,$numeroPedido);
+            if($venta !== null){
+                $venta->setSabor($sabor);
+                $venta->setCantidad($cantidad);
+                $venta->setTipo($tipo);
+                $venta->setEmailUsuario($emailUsuario);
+
+                $key = array_search($venta,$ventas);//-->Busco su key para luego actualizarla
+
+                $ventas[$key] = $venta;//-->Modifico en el array esa venta.
+
+                if(Venta::GuardarJSON($ventas,'./archivos/ventas.json')){//-->Actualizo el JSON
+                    return true;
+                }
+            }
+            else
+                return false;//-->No existe la venta
+        }
+        /**
          * Me permite generar una venta con las validaciones necesarias, 
          * verificar si hay stock, si puede guardar la imagen, si puede generarse.
          * 
@@ -169,7 +240,7 @@
                 . $stringFinal . '_' . (new DateTime('now'))->format('Y-m-d') . '.jpg';
             $directorioImagenesVenta = './ImagenesDeVentas/2023/';
             $rutaImagenVenta = $directorioImagenesVenta . $nombreImagen;
-            // var_dump($ventas);
+            var_dump($ventas);
         
             if ($img !== null) {
                 if (move_uploaded_file($img['tmp_name'], $rutaImagenVenta)) {
@@ -247,6 +318,144 @@
                 return $success;
             }
         }
-    
+
+        public static function BuscarVenta($ventas,$numeroPedido){
+            foreach ($ventas as &$venta) {
+                if ($venta->getNumeroPedido() === $numeroPedido) {
+                    return $venta;
+                }
+            }
+            return null;
+        }
+//********************************************* BUSCAR Y LISTAR *********************************************
+        /**
+         * Me permite filtrar las ventas mediante 
+         * el sabor requerido, imprimiendo una lista
+         * como resultado.
+         * 
+         * @param string el sabor de la pizza a filtrar.
+         */
+        public static function BuscarVentaPorSabor($sabor){
+            $json_file = './archivos/ventas.json';
+            $ventas = Venta::LeerJSON($json_file);
+        
+            if (!empty($ventas) && $ventas !== null) {
+                $ventasSabor = array();
+        
+                foreach ($ventas as $venta) {
+                    if ($venta->getSabor() === $sabor) {
+                        $ventasSabor[] = $venta;
+                    }
+                }
+        
+                if (!empty($ventasSabor)) {
+                    Venta::ListarVentas($ventasSabor);
+                } else {
+                    echo "[No hay ventas realizadas para el sabor " . $sabor . "!]";
+                }
+            } else {
+                echo "[Ocurrió un error al intentar abrir el archivo de ventas!]";
+            }
+        }
+
+        /**
+         * Me permite filtrar el array de ventas y buscar por medio
+         * de su email.
+         * @param string el email del usuario a filtrar.
+         */
+        public static function BuscarVentaPorUsuario($emailUsuario){
+            $json_file = './archivos/ventas.json';
+            $ventas = Venta::LeerJSON($json_file);
+        
+            if (!empty($ventas) && $ventas !== null) {
+                $ventasUsuario = array();
+        
+                foreach ($ventas as $venta) {
+                    if ($venta->getEmailUsuario() === $emailUsuario) {
+                        $ventasUsuario[] = $venta;
+                    }
+                }
+        
+                Venta::ListarVentas($ventasUsuario);
+            } else {
+                echo "[Ocurrió un error al intentar abrir el archivo de ventas!]";
+            }
+        }
+
+        /**
+         * Me permite buscar y listar ventas entre fechas indicadas
+         * 
+         * @param string la fecha de inicio de la buscqueda.
+         * @param string la fehca de fin de la buscqueda.
+         */
+        public static function BuscarYListarVentasEntreFechas($fechaInicio,$fechaFin){
+            $json_file = './archivos/ventas.json';
+            $ventas = Venta::LeerJSON($json_file);
+        
+            if (!empty($ventas) && $ventas !== null) {
+                $ventasFiltradas = array();
+        
+                foreach ($ventas as $venta) {
+                    $fechaVenta = $venta->getFechaVenta();
+                    if ($fechaVenta >= $fechaInicio && $fechaVenta <= $fechaFin) {
+                        $ventasFiltradas[] = $venta;
+                    }
+                }
+        
+                usort($ventasFiltradas, function ($ventaA, $ventaB) {
+                    return strcmp($ventaA->getSabor(), $ventaB->getSabor());
+                });
+        
+                if (!empty($ventasFiltradas)) {
+                    echo "Se vendieron: " . "\n";
+                    Venta::ListarVentas($ventasFiltradas);
+                } else {
+                    echo "[No hubo ventas entre las fechas: " . $fechaInicio . " y " . $fechaFin;
+                }
+            } else {
+                echo "[Ocurrió un error al buscar las ventas!]";
+            }
+        }
+
+        /**
+         * Me permite calcular el total de pizzas vendidas.
+         * @return int||null int la cant de ventas totales,
+         * null si no hay ventas.
+         */
+        public static function CalcularTotalPizzasVendidas() {
+            $json_file = './archivos/ventas.json';
+            $ventas = Venta::LeerJSON($json_file);
+            
+            if (!empty($ventas) && $ventas !== null) {
+                $pizzasVendidas = 0;
+                foreach ($ventas as $venta) {
+                    $pizzasVendidas += $venta->getCantidad();
+                }
+                return $pizzasVendidas;
+            } else {
+                return null;
+            }
+        }
+        
+        /**
+         * Este metodo estatico me permitira listar las
+         * ventas realizadas.
+         * 
+         * @param array el array de ventas.
+         */
+        public static function ListarVentas($ventas){
+            echo "<ul>";
+            foreach($ventas as $venta){
+                echo "<li>";
+                echo "Fecha: " . $venta->getFechaVenta() . "<br>";
+                echo "Usuario: " . $venta->getEmailUsuario() . "<br>";
+                echo "Sabor: " . $venta->getSabor() . "<br>";
+                echo "Tipo: " . $venta->getTipo() . "<br>";
+                echo "Cantidad: " . $venta->getCantidad() . "<br>";
+                echo "Total Venta: $" . $venta->getTotalVenta() . "<br>";
+                echo "</li>";
+            }
+            echo "</ul>";
+        }
 
     }
