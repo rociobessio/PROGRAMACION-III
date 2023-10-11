@@ -1,0 +1,24 @@
+[
+    {
+        "_idVenta": 1,
+        "_emailUsuario": "rocibessio@gmail.com",
+        "_fechaVenta": "2023-10-11",
+        "_sabor": "margarita",
+        "_tipo": "molde",
+        "_totalVenta": 4600,
+        "_cantidad": 2,
+        "_imagenVenta": ".\/ImagenesDeVentas\/2023\/molde_margarita_rocibessio_2023-10-11.jpg",
+        "_numeroPedido": 3634
+    },
+    {
+        "_idVenta": 2,
+        "_emailUsuario": "rocibessio@gmail.com",
+        "_fechaVenta": "2023-10-11",
+        "_sabor": "margarita",
+        "_tipo": "molde",
+        "_totalVenta": 4600,
+        "_cantidad": 2,
+        "_imagenVenta": ".\/ImagenesDeVentas\/2023\/molde_margarita_rocibessio_2023-10-11.jpg",
+        "_numeroPedido": 7023
+    }
+]
