@@ -1,0 +1,23 @@
+[
+    {
+        "_id": 1,
+        "_sabor": "jamon",
+        "_precio": 1200,
+        "_tipo": "molde",
+        "_cantidad": 12
+    },
+    {
+        "_id": 2,
+        "_sabor": "anchoa",
+        "_precio": 1200,
+        "_tipo": "piedra",
+        "_cantidad": 5
+    },
+    {
+        "_id": 3,
+        "_sabor": "roquefort",
+        "_precio": 1500,
+        "_tipo": "molde",
+        "_cantidad": 5
+    }
+]
