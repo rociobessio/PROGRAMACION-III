@@ -1,12 +1,13 @@
 <?php
 
-    include_once "Cupon.php";
+    include_once "./clases/Cupon.php";
 
     class Devolucion{
 //********************************************* ATRIBUTOS *********************************************
         public $_id;
         public $_numeroPedido;
-        public $_causaDevolucion;        
+        public $_causaDevolucion;      
+        public $_idCupon;  
 //********************************************* GETTERS *********************************************
         public function getId(){
             return $this->_id;
@@ -16,6 +17,9 @@
         }
         public function getCausaDevolucion(){
             return $this->_causaDevolucion;
+        }
+        public function getIDCupon(){
+            return $this->_idCupon;
         }
 //********************************************* SETTERS *********************************************
         public function setID($id){
@@ -33,11 +37,17 @@
                 $this->_causaDevolucion = $causa;
             }
         }
+        public function setIDCupon($idCupon){
+            if (isset($idCupon) && is_numeric($idCupon)){
+                $this->_idCupon = $idCupon;
+            }
+        }
 //********************************************* CONSTRUCTOR *********************************************
-        public function __construct($id,$numeroPedido,$causaDevolucion){
+        public function __construct($id,$numeroPedido,$causaDevolucion,$idCupon){
             $this->setID($id);
             $this->setNumeroPedido($numeroPedido);
             $this->setCausaDevolucion($causaDevolucion);
+            $this->setIDCupon($idCupon);
         }
 //********************************************* FUNCIONES *********************************************
 
@@ -51,6 +61,31 @@
             return self::guardarJSON($devoluciones,$jsonFileDevoluciones);
         }
 
+        public static function obtenerDevolucionesConCupones($cupones,$devoluciones){
+            $devolucionesConCuponesYEstados = array();
+            foreach($devoluciones as $devolucion){
+                $idCupon = $devolucion->getIDCupon();//-->Obtengo la id de cupon.
+                $cupon = null;
+
+                foreach($cupones as $c){
+                    if($c->getID() == $idCupon){//-->Busco coincidencia 
+                        $cupon = $c;
+                        break;
+                    }    
+                }
+
+                if ($cupon) {
+                    $estado = $cupon->getEstado();
+                    $devolucionesConCuponesYEstados[] = [
+                        'devolucion' => $devolucion,
+                        'cupon' => $cupon,
+                        'estado' => $estado,
+                    ];
+                }
+            }
+            return $devolucionesConCuponesYEstados;
+        }
+
         /**
          * Me permitira listar devoluciones con cupones
          * en formato <ul> <li></li> <ul>
@@ -60,47 +95,33 @@
          * imprimir.
          * @return string la string a imprimir.
          */
-        public static function listarDevolucionesConCupones($devolucionesConCuponesYEstados) {
+        public static function listarDevolucionesConCuponesYEstado($devolucionesConCuponesYEstados) {
             foreach ($devolucionesConCuponesYEstados as $item) {
                 echo 'Devolución ID: ' . $item['devolucion']->getId() . '<br>';
                 echo 'Cupón ID: ' . $item['cupon']->getID() . '<br>';
-                echo 'Estado del Cupón: ' . ($item['usado'] ? 'Usado' : 'No Usado') . '<br>';
+                
+                echo 'Estado del Cupón: ' . ($item['estado'] === true ? 'Usado' : 'No Usado') . '<br>';
                 echo '<hr>';
             }
         }
 
-        public static function obtenerDevolucionesConCuponesYEstados($devoluciones, $cupones) {
-            $devolucionesConCuponesYEstados = [];
-        
-            foreach ($devoluciones as $devolucion) {
-                $cuponID = $devolucion->getNumeroPedido();
-                // Buscar el cupón correspondiente
-                $cupon = null;
-                foreach ($cupones as $c) {
-                    var_dump($c->getNumeroPedidio());
-                    if ($c->getNumeroPedido() == $cuponID) {
-                        $cupon = $c;
-                        break;
-                    }
-                }
-        
-                if ($cupon !== null) {
-                    $cuponUsado = $cupon->getEstado();
-        
-                    // Agregar la devolución junto con el cupón y su estado de uso a la lista
-                    $devolucionConCuponYEstado = [
-                        'devolucion' => $devolucion,
-                        'cupon' => $cupon,
-                        'usado' => $cuponUsado,
-                    ];
-        
-                    $devolucionesConCuponesYEstados[] = $devolucionConCuponYEstado;
-                }
+        /**
+         * Me permitira listar una devolucion con cupon
+         * y toda su informacion.
+         * @param array el array a imprimir.
+         */
+        public static function listarDevolucionesConCupones($devolucionesConCupones){
+            foreach ($devolucionesConCupones as $item) {
+                echo 'Devolución ID: ' . $item['devolucion']->getId() . '<br>';
+                echo 'Devolucion Causa: ' . $item['devolucion']->getCausaDevolucion() . '<br>';
+                echo 'Numero de Pedido: ' . $item['devolucion']->getNumeroPedido() . '<br>';
+                echo 'Cupón ID: ' . $item['cupon']->getID() . '<br>';
+                echo 'Cupon Usuario: ' . $item['cupon']->getUsuario() . '<br>';
+                echo 'Cupon Descuento: ' . $item['cupon']->getDescuento() . '<br>';
+                echo 'Estado del Cupón: ' . ($item['estado'] === true ? 'Usado' : 'No Usado') . '<br>';
+                echo '<hr>';
             }
-        
-            return $devolucionesConCuponesYEstados;
         }
-        
 
         /**
          * Esta funcion lee un archivo json de devoluciones.
@@ -123,6 +144,7 @@
                                 intval($devolucion["_id"]), 
                                 intval($devolucion["_numeroPedido"]),
                                 $devolucion["_causaDevolucion"],  
+                                $devolucion["_idCupon"],
                             ));
                         }
                     }

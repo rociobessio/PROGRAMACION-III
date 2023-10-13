@@ -2,11 +2,31 @@
     {
         "_id": 169,
         "_numeroPedido": 3988,
-        "_causaDevolucion": "no llego nunca"
+        "_causaDevolucion": "no llego nunca",
+        "_idCupon": 4321
     },
     {
         "_id": 8896,
         "_numeroPedido": 3256,
-        "_causaDevolucion": "esta Fria"
+        "_causaDevolucion": "esta Fria",
+        "_idCupon": 8912
+    },
+    {
+        "_id": 6335,
+        "_numeroPedido": 8030,
+        "_causaDevolucion": "llego tarde",
+        "_idCupon": 3212
+    },
+    {
+        "_id": 505,
+        "_numeroPedido": 8030,
+        "_causaDevolucion": "llego tarde",
+        "_idCupon": 6868
+    },
+    {
+        "_id": 6670,
+        "_numeroPedido": 8030,
+        "_causaDevolucion": "llego tarde",
+        "_idCupon": 6019
     }
 ]

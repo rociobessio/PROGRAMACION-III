@@ -18,12 +18,12 @@
             $jsonFileDevoluciones = './archivos/devoluciones.json';
             $ventas = Venta::leerJSON($jsonFileVentas);
             $venta = Venta::buscarVenta($ventas,$numeroPedido);
-            
+            $idCupon = mt_rand(1,10000);
 
             if($venta !== null){//-->Existe le numero de pedido solicitado
                 //-->Se genera el cupon de descuento y la devolucion.
-                if(Cupon::generarCupon(new Cupon(mt_rand(1,10000),$numeroPedido,$venta->getEmailUsuario(),false,$descuento,$montonFinal),'crear') &&
-                    Devolucion::generarDevolucion(new Devolucion(mt_rand(1,9000),$numeroPedido,$causaDevolucion),$jsonFileDevoluciones)){
+                if(Cupon::generarCupon(new Cupon($idCupon,$numeroPedido,$venta->getEmailUsuario(),false,$descuento,$montonFinal),'crear') &&
+                    Devolucion::generarDevolucion(new Devolucion(mt_rand(1,9000),$numeroPedido,$causaDevolucion,$idCupon),$jsonFileDevoluciones)){
                         echo json_encode(['SUCCESS' => 'Cupon y devolucion generados correctamente!']);        
                 }
                 else

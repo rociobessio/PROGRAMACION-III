@@ -122,7 +122,7 @@
 
             if ($producto !== null) {
                 if ($producto->verificarStock($cantidad)) {
-                    $cupon = Cupon::ObtenerCupon($emailUsuario, $cupones);
+                    $cupon = Cupon::obtenerCupon($emailUsuario, $cupones);
 
                     //-->Verifico si existe el cupon
                     $conDescuento = ($cupon !== null) ? true : false;

@@ -6,10 +6,20 @@
 
         if(isset($_GET['Consultar'])){
             switch ($_GET['Consultar']){
-                case 'ListarDevolucionesConCuponesUsados'://-->C
+                case 'ListarDevolucionesConCupones'://-->C
                     $cupones = Cupon::leerJSON('./archivos/cupones.json');
                     $devoluciones = Devolucion::leerJSON('./archivos/devoluciones.json');
-                    Devolucion::listarDevolucionesConCupones(Devolucion::obtenerDevolucionesConCuponesYEstados($cupones,$devoluciones));
+                    Devolucion::listarDevolucionesConCupones(Devolucion::obtenerDevolucionesConCupones($cupones,$devoluciones));
+                break;
+                case 'ListarCuponesEstado'://-->b-Listar solo los cupones y su estado
+                    $cupones = Cupon::leerJSON('./archivos/cupones.json');
+                    $cuponesConEstado = Cupon::obtenerCuponesConEstado($cupones);
+                    Cupon::listarCuponesEstado($cuponesConEstado);
+                break;
+                case 'ListarDevolucionesConCuponesYEstado':
+                    $cupones = Cupon::leerJSON('./archivos/cupones.json');
+                    $devoluciones = Devolucion::leerJSON('./archivos/devoluciones.json');
+                    Devolucion::listarDevolucionesConCuponesYEstado(Devolucion::obtenerDevolucionesConCupones($cupones,$devoluciones));
                 break;
                 default:
                     echo json_encode(['ERROR' => 'Accion Consultar no permitida']);

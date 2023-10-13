@@ -68,5 +68,15 @@
         "_totalVenta": 2400,
         "_cantidad": 2,
         "_numeroPedido": 7865
+    },
+    {
+        "_idVenta": 8,
+        "_emailUsuario": "rocibessio@gmail.com",
+        "_fechaVenta": "2023-10-13",
+        "_sabor": "anchoa",
+        "_tipo": "piedra",
+        "_totalVenta": 360,
+        "_cantidad": 3,
+        "_numeroPedido": 6905
     }
 ]
