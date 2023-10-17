@@ -1,0 +1,79 @@
+[
+    {
+        "_id": 100000,
+        "_nombre": "rocio",
+        "_apellido": "bessio",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "45013997",
+        "_email": "rocibessio@gmail.com",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 2000
+    },
+    {
+        "_id": 100001,
+        "_nombre": "gaston",
+        "_apellido": "ramirez",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "4019230123",
+        "_email": "gastonRamirez@yahoo.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 6000
+    },
+    {
+        "_id": 100002,
+        "_nombre": "claudia",
+        "_apellido": "romero",
+        "_tipoDocumento": "LE",
+        "_numeroDocumento": "32817345",
+        "_email": "Clauromer45@outlook.com.ar",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 238000
+    },
+    {
+        "_id": 100003,
+        "_nombre": "manuel",
+        "_apellido": "sanchez",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "40987234",
+        "_email": "manusanchez@outlook.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 32000
+    },
+    {
+        "_id": 100004,
+        "_nombre": "josefa",
+        "_apellido": "hernadez",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "29874671",
+        "_email": "josefhernandez@yahoo.com.ar",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 3000000
+    },
+    {
+        "_id": 100005,
+        "_nombre": "miguel",
+        "_apellido": "krivok",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "19876345",
+        "_email": "migkrivk@yahoo.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 2000
+    },
+    {
+        "_id": 100006,
+        "_nombre": "sasha",
+        "_apellido": "rolon",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "37892738",
+        "_email": "sashar@outlook.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "$",
+        "_saldo": 1000
+    }
+]
