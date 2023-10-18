@@ -17,14 +17,6 @@
             return move_uploaded_file($tempFile, $destino);
         } 
         
-        public static function crearPathImagenVenta($email,$sabor,$tipo){
-            $posicionArroba = strpos($email, "@");
-            $stringFinal = substr($email, 0, $posicionArroba);
-            $nombreImagen =  $tipo . '_' . $sabor . '_'
-                . $stringFinal . '_' . (new DateTime('now'))->format('Y-m-d') . '.jpg'; 
-            return $nombreImagen;
-        }
-
         public function moverImagenABackUp($rutaImagen, $directorioRespaldo, $nuevoNombre) {
             //--Formo la ruta completa del path backup
             $rutaRespaldo = $directorioRespaldo . $nuevoNombre;

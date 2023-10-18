@@ -8,7 +8,7 @@
         "_email": "rocibessio@gmail.com",
         "_tipoCuenta": "CA",
         "_moneda": "$",
-        "_saldo": 2000
+        "_saldo": 1500
     },
     {
         "_id": 100001,
@@ -30,7 +30,7 @@
         "_email": "Clauromer45@outlook.com.ar",
         "_tipoCuenta": "CA",
         "_moneda": "$",
-        "_saldo": 238000
+        "_saldo": 152000
     },
     {
         "_id": 100003,
@@ -41,7 +41,7 @@
         "_email": "manusanchez@outlook.com.ar",
         "_tipoCuenta": "CC",
         "_moneda": "USS",
-        "_saldo": 32000
+        "_saldo": 33100
     },
     {
         "_id": 100004,
@@ -63,17 +63,61 @@
         "_email": "migkrivk@yahoo.com.ar",
         "_tipoCuenta": "CC",
         "_moneda": "USS",
-        "_saldo": 2000
+        "_saldo": 1900
     },
     {
         "_id": 100006,
-        "_nombre": "sasha",
-        "_apellido": "rolon",
-        "_tipoDocumento": "DNI",
-        "_numeroDocumento": "37892738",
-        "_email": "sashar@outlook.com.ar",
+        "_nombre": "apola",
+        "_apellido": "argento",
+        "_tipoDocumento": "CI",
+        "_numeroDocumento": "38652781",
+        "_email": "paoarg@gmail.com",
         "_tipoCuenta": "CC",
         "_moneda": "$",
-        "_saldo": 1000
+        "_saldo": 3000
+    },
+    {
+        "_id": 100007,
+        "_nombre": "Nacho",
+        "_apellido": "Gonzalez",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "41982839",
+        "_email": "nachingonz@yahoo.com.ar",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 100000
+    },
+    {
+        "_id": 724390,
+        "_nombre": "Lionel",
+        "_apellido": "Messi",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "36781982",
+        "_email": "leomess@yahoo.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 8500
+    },
+    {
+        "_id": 689712,
+        "_nombre": "Rodrigo",
+        "_apellido": "De Paul",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "398172891",
+        "_email": "rodridpaul@outlook.com.ar",
+        "_tipoCuenta": "CA",
+        "_moneda": "USS",
+        "_saldo": 64000
+    },
+    {
+        "_id": 569067,
+        "_nombre": "lola",
+        "_apellido": "riccheri",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "22789356",
+        "_email": "lolarich@outlook.com.ar",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 3000
     }
 ]

@@ -57,8 +57,12 @@
             }
         }
         public function setTipoDocumento($tipoDocumento){
-            if(isset($tipoDocumento) && !empty($tipoDocumento)) {
+            if(isset($tipoDocumento) && !empty($tipoDocumento) && self::validarTipoDocumento($tipoDocumento)) {
                 $this->_tipoDocumento = $tipoDocumento;
+            }
+            else{
+                echo 'tipo documento no valido se aceptan [DNI,LE,LC,CI], reingrese!<br>';
+                exit;
             }
         } 
         public function setNumeroDocumento($numeroDocumento){
@@ -72,13 +76,21 @@
             }
         }
         public function setTipoCuenta($tipoCuenta){
-            if(isset($tipoCuenta) && !empty($tipoCuenta)) {
+            if(isset($tipoCuenta) && !empty($tipoCuenta) && self::validarTipoCuenta($tipoCuenta)) {
                 $this->_tipoCuenta = $tipoCuenta;
+            }
+            else{
+                echo 'tipo de cuenta no valido se acepta [CC,CA],reingrese!<br>';
+                exit;
             }
         }
         public function setMoneda($moneda){
-            if(isset($moneda) && !empty($moneda)) {
+            if(isset($moneda) && !empty($moneda) && self::validarMoneda($moneda)) {
                 $this->_moneda = $moneda;
+            }
+            else{
+                echo 'moneda no valida se aceptan [$,USS], reingrese!<br>';
+                exit;
             }
         }
         public function setSaldo($saldo){
@@ -122,7 +134,7 @@
          * @return bool true si es valido,
          * false sino.
          */
-        public static function validarTipoCuenta($tipo){
+        private static function validarTipoCuenta($tipo){
             $tipos = ["CA","CC"];
             if(in_array(strtoupper($tipo),$tipos))
                 return true;
@@ -130,7 +142,7 @@
                 return false;
         }
 
-        public static function validarMoneda($moneda){
+        private static function validarMoneda($moneda){
             $tipos = ["$","USS"];
             if(in_array(strtoupper($moneda),$tipos))
                 return true;
@@ -146,12 +158,22 @@
          * Libreta de Enrolamiento - L.E. 
          * Cédula de Identidad -C.I.
          */
-        public static function validarTipoDocumento($tipo){
+        private static function validarTipoDocumento($tipo){
             $tipos = ["DNI","LC","LE","CI"];
             if(in_array(strtoupper($tipo),$tipos))
                 return true;
             else
                 return false;
+        }
+
+        /**
+         * Verifica si el saldo de la instancia
+         * es mayor o menor al saldo que recibe.
+         * @param float $saldo el saldo a comprobar.
+         * @return bool true si es mayor, false sino.
+         */
+        public function verificarSaldo($saldo){
+            return $this->getSaldo() > $saldo;
         }
 
         /**
@@ -165,26 +187,32 @@
          * @param float $saldo el saldo.
          * @param string $jsonFile el path del archivo de cuentas.json
          * 
+         * 
          * @return bool true si pudo actualizar o crear la cuenta,
          * false sino.
          */
-        public static function cargarCuenta($cuenta,$cuentas,$saldo,$jsonFile){
-            $cuentaBuscar  = $cuenta->buscarCuenta($cuentas,$cuenta->getNombre(),$cuenta->getTipoCuenta());
+        public static function cargarCuenta($cuenta,$saldo,$jsonFile,$imagen){
+            $archivoGuardar = new Uploader('./ImagenesDeCuentas/2023/');
+            $cuentas = Cuenta::leerJSON($jsonFile); 
+            $cuentaBuscar  = $cuenta->buscarCuenta($cuentas,$cuenta->getNombre(),$cuenta->getApellido(),$cuenta->getTipoCuenta());
+            
             if($cuentaBuscar !== null){//-->Existe
                 $cuentaBuscar->setSaldo( $cuentaBuscar->getSaldo() + $saldo);
                 // var_dump($cuenta->getSaldo());
                 return self::actualizarCuenta($cuentas,$cuentaBuscar,$jsonFile);
             }
-            else{//-->false, no existe
-                $nuevaCuenta = $cuenta; 
-                $cuentas[] = $nuevaCuenta;
+            else{//-->false, no existe 
+                $cuentas[] = $cuenta;
                 echo 'Creando cuenta...!<br>';
+                $nombreImagen = $cuenta->getID().'_' . $cuenta->getTipoCuenta() . '.jpg';
+                //-->Intento guardar la imagen del alta
+                if(!$archivoGuardar->guardarImagen($imagen['tmp_name'],$nombreImagen)){
+                    echo json_encode(['WARNING' => 'No se ha podido guardar la imagen de la cuenta!<br>']);    
+                }
                 return self::guardarJSON($cuentas,$jsonFile);
             }
             return false;
         }
-
-        
 
         /**
          * Actualiza una cuenta en el array 
@@ -199,6 +227,7 @@
          * bien el archivo, false sino.
          */
         public static function actualizarCuenta(&$cuentas, $cuentaExistente, $jsonFile){
+            
             foreach ($cuentas as &$cuenta) { 
                 if ($cuenta->getID() == $cuentaExistente->getID()) {
                     $cuenta = $cuentaExistente;
@@ -221,39 +250,42 @@
          * @return Cuenta||null retornara la cuenta si existe,
          * null sino.
          */
-        public function buscarCuenta($cuentas,$nombre,$tipoCuenta){ 
+        public function buscarCuenta($cuentas,$nombre,$apellido,$tipoCuenta){ 
                 foreach ($cuentas as $cuenta) {
                     // var_dump($cuenta);
-                    if($cuenta->getNombre() === $nombre && $cuenta->getTipoCuenta() === $tipoCuenta){
+                    if($cuenta->getNombre() === $nombre && $cuenta->getApellido() === $apellido &&
+                     $cuenta->getTipoCuenta() === $tipoCuenta){
                         return $cuenta;
                 } 
             }
             return null;
         }
 
-        public static function buscarPorNumeroCuenta($cuentas,$nroCuenta,$tipoCuenta){
+        /**
+         * Esta function me permite buscar una coincidencia
+         * de una cuenta en un array.
+         * 
+         * @param array $cuentas el array de cuentas.
+         * @param int $nroCuenta el nro de cuenta.
+         * @param string $tipoCuenta el tipo de la cuenta
+         * @param string||null $moneda puede no pasarse 
+         * y compara por el nro de cuenta y el tipoCuenta.
+         * En caso de pasarse $moneda se fijara la coincidencia
+         * retornando la cuenta. Esto sirve para el punto 
+         * ModificarCuenta, donde se busca por tipo y nro, 
+         * y en el enunciado 3 se compara por las 3.
+         * 
+         * @return Cuenta||null
+         */
+        public static function buscarPorNumeroCuenta($cuentas, $nroCuenta, $tipoCuenta, $moneda = null) {
             foreach ($cuentas as $cuenta) {
-                if($cuenta->getID() === $nroCuenta && $cuenta->getTipoCuenta() === $tipoCuenta){
-                    return $cuenta;
+                if ($cuenta->getID() === $nroCuenta && $cuenta->getTipoCuenta() === $tipoCuenta) {
+                    if ($moneda === null || $cuenta->getMoneda() === $moneda) {
+                        return $cuenta;
+                    }
                 }
             }
             return null;
-        }
-
-        /**
-         * Me permitira retornar el ultimo id del array.
-         * @param array $cuentas el array de cuentas
-         * 
-         * @return int $ultimoID el ultimo ID.
-         */
-        public static function obtenerUltimoID($cuentas){
-            $ultimoID = 0;
-            foreach ($cuentas as $cuenta) {
-                if ($cuenta->getID() > $ultimoID) {
-                    $ultimoID = $cuenta->getID();
-                }
-            } 
-            return $ultimoID;
         }
 
         /**
@@ -275,7 +307,8 @@
             $cuentasConNro = [];
             foreach($cuentas as $cuenta){
                 if($cuenta->getTipoCuenta() === $tipo && $cuenta->getID() === $numeroCuenta){
-                    return 'Si hay cuentas con tipo de cuenta: ' . $tipo . ' y numero: ' . $numeroCuenta;
+                    return 'Si hay cuentas con tipo de cuenta: ' . $tipo . ' y numero: ' . $numeroCuenta . 
+                    '<br> Su saldo es: $' . $cuenta->getSaldo() . ' y la moneda de ella es: ' . $cuenta->getMoneda();
                 }
                 if($cuenta->getTipoCuenta() === $tipo){
                     $cuentasConTipo[] = $cuenta;
@@ -284,15 +317,16 @@
                 { $cuentasConNro = $cuenta;}
             }
 
-            if(!empty($cuentasConTipo) && !empty($cuentasConNro)){
-                $msj = 'Si hay cuenta con tipo: ' . $tipo . ' y numero: ' . $numeroCuenta;
+            if (!empty($cuentasConTipo) && empty($cuentasConNro)) {
+                $msj = 'Si hay cuentas con tipo: ' . $tipo . ' pero el numero: ' . $numeroCuenta . ' no le pertenece';
+            } elseif (!empty($cuentasConNro) && empty($cuentasConTipo)) {
+                $msj = 'Solo hay cuentas con el numero: ' . $numeroCuenta . ' pero no con el tipo: ' . $tipo;
+            } elseif (!empty($cuentasConTipo)) {
+                $msj = 'No hay coincidencia de tipo de cuenta: ' . $tipo . ' y numero de cuenta: ' . $numeroCuenta;
+            } else {
+                $msj = 'No existe la combinacion de numero y tipo de cuenta.';
             }
-            elseif (!empty($cuentasConNro)){
-                $msj = 'Solo hay cuenta con numero: '. $numeroCuenta ;
-            }
-            elseif (!empty($cuentasConTipo)){
-                $msj = 'Solo hay cuenta con tipo: '. $tipo ;
-            }
+            
             return $msj;
         }
 

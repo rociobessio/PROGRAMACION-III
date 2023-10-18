@@ -1,0 +1,50 @@
+[
+    {
+        "_id": 1,
+        "_motivoAjuste": "error en la extraccion",
+        "_ajusteMonto": 200,
+        "_numeroBuscado": 4,
+        "_numeroCuenta": 100006,
+        "_ajusteSobre": "extraccion"
+    },
+    {
+        "_id": 2,
+        "_motivoAjuste": "error con monto en la extraccion",
+        "_ajusteMonto": 100,
+        "_numeroBuscado": 4,
+        "_numeroCuenta": 100006,
+        "_ajusteSobre": "extraccion"
+    },
+    {
+        "_id": 3,
+        "_motivoAjuste": "error en la extraccion",
+        "_ajusteMonto": 2000,
+        "_numeroBuscado": 3,
+        "_numeroCuenta": 100002,
+        "_ajusteSobre": "depositos"
+    },
+    {
+        "_id": 4,
+        "_motivoAjuste": "confusion al generar extraccion",
+        "_ajusteMonto": 10000,
+        "_numeroBuscado": 2,
+        "_numeroCuenta": 100002,
+        "_ajusteSobre": "extracciones"
+    },
+    {
+        "_id": 5,
+        "_motivoAjuste": "reintegro factura",
+        "_ajusteMonto": 1000,
+        "_numeroBuscado": 2,
+        "_numeroCuenta": 100003,
+        "_ajusteSobre": "depositos"
+    },
+    {
+        "_id": 6,
+        "_motivoAjuste": "factura mal generada",
+        "_ajusteMonto": 100,
+        "_numeroBuscado": 2,
+        "_numeroCuenta": 100003,
+        "_ajusteSobre": "depositos"
+    }
+]

@@ -18,14 +18,16 @@
         if(isset($_POST['tipoCuenta']) && isset($_POST['nroCuenta']) && isset($_POST['moneda'])
         && isset($_POST['importe']) && isset($_FILES['imagen'])){
             $imagen = $_FILES['imagen'];
+            $moneda = $_POST['moneda'];
+            $nroCuenta = intval($_POST['nroCuenta']);
+            $importe = floatval($_POST['importe']);
+            $tipoCuenta = $_POST['tipoCuenta'];
             
-
             $jsonFileCuentas = './archivos/banco.json';
             $cuentas = Cuenta::leerJSON($jsonFileCuentas);
-            $cuenta = Cuenta::buscarPorNumeroCuenta($cuentas,intval($_POST['nroCuenta']),$_POST['tipoCuenta']);
-            var_dump($cuenta);
+            $cuenta = Cuenta::buscarPorNumeroCuenta($cuentas,$nroCuenta,$tipoCuenta,$moneda); 
 
-            if(Deposito::generarDeposito($cuenta,$cuentas,$_POST['importe'],$_POST['moneda'],$imagen)){
+            if(Deposito::generarDeposito($cuenta,$cuentas,$importe,$moneda,$imagen)){
 
                 echo json_encode(['SUCCESS' => 'Deposito generado correctamente!<br>']);
             }

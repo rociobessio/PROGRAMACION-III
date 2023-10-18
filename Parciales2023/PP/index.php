@@ -7,7 +7,9 @@
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['accion'])) {
             switch ($_GET['accion']) { 
-
+                case 'ConsultarMovimientos':
+                    include_once "app/ConsultaMovimientos.php";
+                break;
                 default:
                     echo json_encode(['error' => 'Accion GET no permitida']);
                 break;
@@ -28,6 +30,12 @@
                 case 'DepositoCuenta':
                     include_once "app/DepositoCuenta.php";
                 break;
+                case 'RetiroCuenta':
+                    include_once "app/RetiroCuenta.php";
+                break;
+                case 'AjusteCuenta':
+                    include_once "app/AjusteCuenta.php";
+                break;
                 default:
                     echo json_encode(['ERROR' => 'Accion POST no permitido']);
                 break;
@@ -40,7 +48,9 @@
 
         if (isset($_GET['accion'])) {
             switch ($_GET['accion']) {
-        
+                case 'ModificarCuenta':
+                    include_once "app/ModificarCuenta.php";
+                break;
                 default:
                     echo json_encode(['error' => 'Accion PUT no valida']);
                 break;

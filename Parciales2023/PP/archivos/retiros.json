@@ -1,0 +1,56 @@
+[
+    {
+        "_id": 1,
+        "_numeroCuenta": 100000,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 500,
+        "_emailUsuario": "rocibessio@gmail.com",
+        "_fechaExtraccion": "2023-10-17"
+    },
+    {
+        "_id": 2,
+        "_numeroCuenta": 100002,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 90000,
+        "_emailUsuario": "Clauromer45@outlook.com.ar",
+        "_fechaExtraccion": "2023-10-17"
+    },
+    {
+        "_id": 3,
+        "_numeroCuenta": 100005,
+        "_tipoCuenta": "CC",
+        "_monedaCuenta": "USS",
+        "_importeRetiro": 100,
+        "_emailUsuario": "migkrivk@yahoo.com.ar",
+        "_fechaExtraccion": "2023-10-17"
+    },
+    {
+        "_id": 4,
+        "_numeroCuenta": 100006,
+        "_tipoCuenta": "CC",
+        "_monedaCuenta": "USS",
+        "_importeRetiro": 400,
+        "_emailUsuario": "lolett@gmail.com",
+        "_fechaExtraccion": "2023-10-17"
+    },
+    {
+        "_id": 5,
+        "_numeroCuenta": 689712,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "USS",
+        "_importeRetiro": 2000,
+        "_emailUsuario": "rodridpaul@outlook.com.ar",
+        "_fechaExtraccion": "2023-10-18"
+    },
+    {
+        "_id": 6,
+        "_numeroCuenta": 724390,
+        "_tipoCuenta": "CC",
+        "_monedaCuenta": "USS",
+        "_importeRetiro": 1500,
+        "_emailUsuario": "leomess@yahoo.com.ar",
+        "_fechaExtraccion": "2023-10-18"
+    }
+]
