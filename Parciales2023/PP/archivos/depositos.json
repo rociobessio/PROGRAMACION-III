@@ -9,19 +9,19 @@
     },
     {
         "_id": 2,
-        "_numeroCuenta": 100003,
-        "_tipoCuenta": "CC",
-        "_moneda": "$",
-        "_importe": 900,
-        "_fechaDeposito": "2023-10-16"
-    },
-    {
-        "_id": 3,
         "_numeroCuenta": 100002,
         "_tipoCuenta": "CA",
         "_moneda": "$",
         "_importe": 4000,
         "_fechaDeposito": "2023-10-17"
+    },
+    {
+        "_id": 3,
+        "_numeroCuenta": 100003,
+        "_tipoCuenta": "CC",
+        "_moneda": "$",
+        "_importe": 900,
+        "_fechaDeposito": "2023-10-16"
     },
     {
         "_id": 4,
@@ -33,18 +33,18 @@
     },
     {
         "_id": 5,
-        "_numeroCuenta": 689712,
-        "_tipoCuenta": "CA",
-        "_moneda": "USS",
-        "_importe": 2000,
-        "_fechaDeposito": "2023-10-18"
-    },
-    {
-        "_id": 6,
         "_numeroCuenta": 569067,
         "_tipoCuenta": "CC",
         "_moneda": "USS",
         "_importe": 1000,
+        "_fechaDeposito": "2023-10-18"
+    },
+    {
+        "_id": 6,
+        "_numeroCuenta": 689712,
+        "_tipoCuenta": "CA",
+        "_moneda": "USS",
+        "_importe": 2000,
         "_fechaDeposito": "2023-10-18"
     }
 ]

@@ -40,7 +40,7 @@
         "_numeroDocumento": "40987234",
         "_email": "manusanchez@outlook.com.ar",
         "_tipoCuenta": "CC",
-        "_moneda": "USS",
+        "_moneda": "$",
         "_saldo": 33100
     },
     {
@@ -100,7 +100,7 @@
     },
     {
         "_id": 689712,
-        "_nombre": "Rodrigo",
+        "_nombre": "rodrigo",
         "_apellido": "De Paul",
         "_tipoDocumento": "DNI",
         "_numeroDocumento": "398172891",

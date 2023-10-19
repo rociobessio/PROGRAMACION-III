@@ -119,8 +119,7 @@
          * buscar, puede ser null y  se buscaran las del
          * dia de ayer.
          * 
-         * @param bool true si es que hay depositos
-         * con la fecha indicada, false sino.
+         * @param bool 
          */
         public static function calcularTotalDepositos($fecha = null){
             $retorno = false;
@@ -175,54 +174,64 @@
             return $retorno; 
         }
 
+        /**
+         * Me permite buscar y listar los depositos entre dos fechas ingresadas, 
+         * ordenandolas por nombre de cuenta.
+         * 
+         * @param string $fechaInicio
+         * @param string $fechaFin
+         * @param array $depositos
+         * @param array $cuentas
+         * 
+         * 1. Con array_filter filtro el array de $depositos, $deposito es la variable. Le paso variables externas,
+         * para que pueda usarlas ($fechaIncia,$fechaFin y $cuentas). Busco si hay una cuenta asociada.
+         * Si la cuenta no es null y las fechas del deposito cumplen con las fechas ingresadas por parametro entonces
+         * el array_filter guardara el elemento en $depositos filtrados.
+         * 
+         * 2. Ordeno el array filtrado por nombre mediante una function anonima. Obtien el nombre
+         * de la cuenta mediante buscando la cuenta por su numero y tipo de cuenta. 
+         * ...)->getNombre() devuelve el nombre de la cuenta. Luego compara con la funcion strcmp
+         * $nombreA y $nombreB
+         * 
+         * 3. Por último listara los depositos que se filtraron
+         * 
+         * @return bool true si pudo buscar y listar correctamente,
+         * false caso contrario.
+         */
         public static function buscarYListarDepositosEntreFechas($fechaInicio, $fechaFin, $depositos, $cuentas) {
-            $retorno = false;
-            if (!empty($depositos) && $depositos !== null) {
-                $depositosFiltrados = array();
-        
-                foreach ($depositos as $deposito) {
-                    $numeroCuenta = $deposito->getNumeroCuenta();
-        
-                    // Busca la cuenta asociada al número de cuenta del depósito
-                    $cuentaAsociada = null;
-                    foreach ($cuentas as $cuenta) {
-                        if ($cuenta->getID() === $numeroCuenta) {
-                            $cuentaAsociada = $cuenta;
-                            break; // Sale del bucle una vez que se encuentra la cuenta asociada
-                        }
-                    }
-        
-                    // Verifica si se encontró la cuenta asociada y si la fecha del depósito está en el rango
-                    if ($cuentaAsociada !== null && ($fechaInicio <= $deposito->getFechaDeposito() &&
-                        $fechaFin >= $deposito->getFechaDeposito())) {
-                        $depositosFiltrados[] = array(
-                            'nombreCuenta' => $cuentaAsociada->getNombre() . ' ' . $cuentaAsociada->getApellido(),
-                            'deposito' => $deposito
-                        );
-                    }
-                }
-        
-                // Ordena los depósitos por el nombre de la cuenta
-                usort($depositosFiltrados, function ($a, $b) {
-                    return strcmp($a['nombreCuenta'], $b['nombreCuenta']);
-                });
-        
-                // Extrae los objetos de depósito del array resultante
-                $depositosOrdenados = array_map(function ($item) {
-                    return $item['deposito'];
-                }, $depositosFiltrados);
-
-                if(!empty($depositosOrdenados)){
-                    foreach($depositos as $deposito){ 
-                        $deposito->listarDeposito();
-                    }
-                    $retorno = true;
-                }
-        
-                return $retorno;
+            if (empty($depositos) || $depositos === null) {
+                return false;
             }
-        }
+            
+            //-->#1
+            $depositosFiltrados = array_filter($depositos, function ($deposito) use ($fechaInicio, $fechaFin, $cuentas) {
+                $cuentaAsociada = Cuenta::buscarPorNumeroCuenta($cuentas, $deposito->getNumeroCuenta(), $deposito->getTipoCuenta(), $deposito->getMoneda());
+                return (
+                    $cuentaAsociada !== null &&
+                    $fechaInicio <= $deposito->getFechaDeposito() &&
+                    $fechaFin >= $deposito->getFechaDeposito()
+                );
+            });
+            
+            //-->#2
+            usort($depositosFiltrados, function ($a, $b) use ($cuentas) {
+                $nombreA = Cuenta::buscarPorNumeroCuenta($cuentas, $a->getNumeroCuenta(), $a->getTipoCuenta())->getNombre();
+                $nombreB = Cuenta::buscarPorNumeroCuenta($cuentas, $b->getNumeroCuenta(), $b->getTipoCuenta())->getNombre();
+                
+                return strcmp($nombreA, $nombreB);
+            });
+            
+            //-->#3
+            if (!empty($depositosFiltrados)) {
+                foreach ($depositosFiltrados as $deposito) {
+                    $deposito->listarDeposito();
+                }
+                return true;
+            }
         
+            return false;
+        } 
+
         /**
          * Busca y lista los depositos por el tipo de 
          * cuenta ingresados.
