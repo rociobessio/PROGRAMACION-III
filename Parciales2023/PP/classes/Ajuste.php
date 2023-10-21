@@ -237,8 +237,8 @@
          * correctamente, false sino.
          */
         private static function aplicarAjusteDeposito($motivo, $ajuste, $deposito, &$depositos, &$cuentas, &$ajustes) { 
-            if ($deposito->verificarImporte($ajuste)) {//-->Verifico que el ajuste no sea mayor al importe de deposito
-                $deposito->setImporte($deposito->getImporte() - $ajuste);
+            if ($deposito->verificarImporte($ajuste)) {//-->Se suma el ajuste al deposito
+                $deposito->setImporte($deposito->getImporte() + $ajuste);
                 $cuentaExistente = Cuenta::buscarPorNumeroCuenta($cuentas, $deposito->getNumeroCuenta(), $deposito->getTipoCuenta());
 
                 if ($cuentaExistente !== null) {

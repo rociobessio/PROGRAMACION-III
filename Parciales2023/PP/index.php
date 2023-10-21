@@ -3,7 +3,6 @@
      * A- index.php: Recibe todas las peticiones que realiza el cliente (utilizaremos Postman),
      * y administra a qué archivo se debe incluir.
      */
-
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (isset($_GET['accion'])) {
             switch ($_GET['accion']) { 

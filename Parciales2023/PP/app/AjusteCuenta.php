@@ -32,6 +32,8 @@
                     echo json_encode(['ERROR' => 'No se ha podido generar el ajuste!']);
                 } 
             }
+            else
+                echo json_encode(['ERROR' => 'Para completar la accion se debe de ingresar el nro de deposito o de extraccion!']);
         }
         else
             echo json_encode(['ERROR' => 'Faltan parametros OBLIGARTORIOS por ingresar!']);

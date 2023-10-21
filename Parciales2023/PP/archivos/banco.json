@@ -67,25 +67,25 @@
     },
     {
         "_id": 100006,
-        "_nombre": "apola",
+        "_nombre": "paola",
         "_apellido": "argento",
         "_tipoDocumento": "CI",
         "_numeroDocumento": "38652781",
         "_email": "paoarg@gmail.com",
         "_tipoCuenta": "CC",
         "_moneda": "$",
-        "_saldo": 3000
+        "_saldo": 4400
     },
     {
         "_id": 100007,
-        "_nombre": "Nacho",
-        "_apellido": "Gonzalez",
-        "_tipoDocumento": "LC",
-        "_numeroDocumento": "41982839",
-        "_email": "nachingonz@yahoo.com.ar",
+        "_nombre": "coqui",
+        "_apellido": "argento",
+        "_tipoDocumento": "DNI",
+        "_numeroDocumento": "398172831",
+        "_email": "coquiiiarg@gmail.com",
         "_tipoCuenta": "CA",
         "_moneda": "$",
-        "_saldo": 100000
+        "_saldo": 102000
     },
     {
         "_id": 724390,
@@ -96,7 +96,7 @@
         "_email": "leomess@yahoo.com.ar",
         "_tipoCuenta": "CC",
         "_moneda": "USS",
-        "_saldo": 8500
+        "_saldo": 15500
     },
     {
         "_id": 689712,
@@ -118,6 +118,50 @@
         "_email": "lolarich@outlook.com.ar",
         "_tipoCuenta": "CC",
         "_moneda": "USS",
-        "_saldo": 3000
+        "_saldo": 3600
+    },
+    {
+        "_id": 490821,
+        "_nombre": "Bob",
+        "_apellido": "Burguer",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "297638749",
+        "_email": "bobsburguer@gmail.com",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 14000
+    },
+    {
+        "_id": 256910,
+        "_nombre": "Tina",
+        "_apellido": "Burguer",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "47627192",
+        "_email": "tinaburguer@gmail.com",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 1800
+    },
+    {
+        "_id": 226185,
+        "_nombre": "Bender",
+        "_apellido": "metalico",
+        "_tipoDocumento": "LE",
+        "_numeroDocumento": "0101010100",
+        "_email": "benderfuturama@expressgalaxy.org",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 9910
+    },
+    {
+        "_id": 969893,
+        "_nombre": "fry",
+        "_apellido": "futurama",
+        "_tipoDocumento": "LC",
+        "_numeroDocumento": "428930129",
+        "_email": "fryfrfuturama@expressgalaxy.org",
+        "_tipoCuenta": "CA",
+        "_moneda": "$",
+        "_saldo": 10700
     }
 ]

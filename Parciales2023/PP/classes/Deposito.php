@@ -1,7 +1,7 @@
 <?php
 
     require_once "./classes/Cuenta.php";
-    require_once "./Uploader.php";
+    require_once "./classes/Uploader.php";
 
     class Deposito{
 //********************************************* ATRIBUTOS *********************************************
@@ -75,6 +75,15 @@
 
         /**
          * Me permitira generar un nuevo deposito
+         * @param Cuenta||null $cuenta la cuenta sobre la cual
+         * se hara el deposito.
+         * @param array $cuentas el array de cuentas.
+         * @param float $importe el importe del deposito.
+         * @param string $moneda la moneda
+         * @param $imagen la imagen que se guardara con el  
+         * deposito.
+         * 
+         * @return bool true si pudo generarlo, false sino.
          */
         public static function generarDeposito($cuenta,$cuentas,$importe,$moneda,$imagen){
             $jsonFileCuentas = './archivos/banco.json';
@@ -115,43 +124,39 @@
          * Me permite calcular el total depositado por
          * tipo de cuenta y moneda en un dia en particular.
          * 
+         * @param string $moneda la moneda buscada.
+         * @param string $tipoCuenta el tipo de la cuenta.
          * @param string $fecha la fecha en particular a 
          * buscar, puede ser null y  se buscaran las del
          * dia de ayer.
          * 
          * @param bool 
          */
-        public static function calcularTotalDepositos($fecha = null){
+        public static function calcularTotalDepositos($moneda,$tipoCuenta,$fecha = null){
             $retorno = false;
             $depositos = self::leerJSON('./archivos/depositos.json');
-            $totalDepositadoCC = 0;
-            $totalDepositadoCA = 0;
-
+            $totalDepositado = 0; 
+        
             if (!empty($depositos) && $depositos !== null) {
                 if ($fecha === null) {
                     $fecha = date('Y-m-d', strtotime('yesterday'));//-->Sino recibo es la fecha de ayer
                 }
                 foreach($depositos as $deposito){
-                    if($deposito->getFechaDeposito() == $fecha){
-                        if($deposito->getTipoCuenta() === "CA"){
-                            $totalDepositadoCA += $deposito->getImporte();
+                    if($deposito->getFechaDeposito() == $fecha &&
+                        $deposito->getMoneda() == $moneda &&
+                        $deposito->getTipoCuenta() == $tipoCuenta){  
+                            $totalDepositado += $deposito->getImporte();
                             $retorno = true;
                         }
-                        else if($deposito->getTipoCuenta() === "CC"){
-                            $totalDepositadoCC += $deposito->getImporte();
-                            $retorno = true;
-                        }
-                    }
                 }
                 if($retorno){
-                    echo 'El monto total depositado con tipo de cuenta CC: $' . $totalDepositadoCC . ' en la fecha: ' . $fecha . '<br>';
-                    echo 'El monto total depositado con tipo de cuenta CA: $' . $totalDepositadoCA . ' en la fecha: ' . $fecha . '<br>';
+                    echo 'El monto total depositado con tipo de cuenta: ' . $tipoCuenta. ' en la fecha: ' . $fecha . '<br>' . 
+                    'es: ' . $moneda  . $totalDepositado .'<br>';
                 }
             }
             return $retorno;
-        }
-
-        /**
+        }   
+               /**
          * Me permitira buscar los movimientos (depositos)
          * realizados por un usuario.
          * @param array $cuentas el array de cuentas

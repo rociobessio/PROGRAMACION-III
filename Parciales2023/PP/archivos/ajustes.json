@@ -46,5 +46,29 @@
         "_numeroBuscado": 2,
         "_numeroCuenta": 100003,
         "_ajusteSobre": "depositos"
+    },
+    {
+        "_id": 7,
+        "_motivoAjuste": "deposito mal colocado",
+        "_ajusteMonto": 200,
+        "_numeroBuscado": 5,
+        "_numeroCuenta": 569067,
+        "_ajusteSobre": "depositos"
+    },
+    {
+        "_id": 8,
+        "_motivoAjuste": "deposito mal colocado",
+        "_ajusteMonto": 200,
+        "_numeroBuscado": 5,
+        "_numeroCuenta": 569067,
+        "_ajusteSobre": "depositos"
+    },
+    {
+        "_id": 9,
+        "_motivoAjuste": "error al generar la extraccion",
+        "_ajusteMonto": 400,
+        "_numeroBuscado": 9,
+        "_numeroCuenta": 969893,
+        "_ajusteSobre": "extracciones"
     }
 ]

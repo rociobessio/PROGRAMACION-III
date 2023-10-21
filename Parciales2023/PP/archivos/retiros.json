@@ -52,5 +52,32 @@
         "_importeRetiro": 1500,
         "_emailUsuario": "leomess@yahoo.com.ar",
         "_fechaExtraccion": "2023-10-18"
+    },
+    {
+        "_id": 7,
+        "_numeroCuenta": 490821,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 1500,
+        "_emailUsuario": "bobsburguer@gmail.com",
+        "_fechaExtraccion": "2023-10-21"
+    },
+    {
+        "_id": 8,
+        "_numeroCuenta": 256910,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 200,
+        "_emailUsuario": "tinaburguer@gmail.com",
+        "_fechaExtraccion": "2023-10-21"
+    },
+    {
+        "_id": 9,
+        "_numeroCuenta": 969893,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 800,
+        "_emailUsuario": "fryfrfuturama@expressgalaxy.org",
+        "_fechaExtraccion": "2023-10-21"
     }
 ]

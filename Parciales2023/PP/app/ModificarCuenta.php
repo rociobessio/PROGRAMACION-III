@@ -10,8 +10,7 @@
     if($_SERVER['REQUEST_METHOD'] === 'PUT') {
         if(isset($putData['numeroCuenta']) && isset($putData['nombre']) && isset($putData['apellido']) &&
         isset($putData['tipoDocumento']) && isset($putData['numeroDocumento']) && isset($putData['email']) &&
-        isset($putData['tipoCuenta']) && isset($putData['moneda'])){
-
+        isset($putData['tipoCuenta']) && isset($putData['moneda'])){ 
             $numeroCuenta = intval($putData['numeroCuenta']);
             $nombre = $putData['nombre'];
             $apellido = $putData['apellido'];

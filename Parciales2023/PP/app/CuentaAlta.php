@@ -1,12 +1,12 @@
 <?php
 
     require_once "./classes/Cuenta.php";
-    require_once "./Uploader.php";
+    require_once "./classes/Uploader.php";
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['tipoDocumento']) &&
         isset($_POST['numeroDocumento']) && isset($_POST['email']) && isset($_POST['tipoCuenta']) &&
-        isset($_POST['moneda']) && isset($_POST['saldo'])){ 
+        isset($_POST['moneda']) && isset($_POST['saldo']) && isset($_FILES['imagen'])){ 
             $imagen = $_FILES['imagen'];
             $saldo = floatval($_POST['saldo']);
 

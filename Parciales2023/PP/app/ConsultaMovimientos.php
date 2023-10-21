@@ -16,12 +16,18 @@
         if(isset($_GET['Consulta'])){
             switch ($_GET['Consulta']){
                 case 'TotalDepositadoDiaParticular':
-                    //-->En caso de no recibir una fecha en particular se asignara la de hoy
-                    $fecha = $_GET['fechaParticular'] ?? date("Y-m-d"); 
-                    $resultado = Deposito::calcularTotalDepositos($fecha);
-                    if (!$resultado) {
-                        echo "[No se ha podido calcular el total de depositos !]";
+                    if(isset($_GET['moneda']) && isset($_GET['tipoCuenta'])){
+                        //-->En caso de no recibir una fecha en particular se asignara la de hoy
+                        $fecha = $_GET['fechaParticular'] ?? date("Y-m-d");
+                        $moneda = $_GET['moneda'];
+                        $tipoCuenta = $_GET['tipoCuenta'];
+                        $resultado = Deposito::calcularTotalDepositos($moneda,$tipoCuenta,$fecha);
+                        if (!$resultado) {
+                            echo "[No se ha podido calcular el total de depositos !]";
+                        }
                     }
+                    else
+                        echo json_encode(['ERROR' => 'Se necesita el ingreso de parametros!']);    
                 break;
                 case 'ListadoUsuarioParticular'://-->El listado de depósitos para un usuario en particular.
                     if(isset($_GET['emailUsuario'])){

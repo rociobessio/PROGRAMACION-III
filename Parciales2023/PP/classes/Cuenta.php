@@ -197,8 +197,7 @@
             $cuentaBuscar  = $cuenta->buscarCuenta($cuentas,$cuenta->getNombre(),$cuenta->getApellido(),$cuenta->getTipoCuenta());
             
             if($cuentaBuscar !== null){//-->Existe
-                $cuentaBuscar->setSaldo( $cuentaBuscar->getSaldo() + $saldo);
-                // var_dump($cuenta->getSaldo());
+                $cuentaBuscar->setSaldo( $cuentaBuscar->getSaldo() + $saldo); 
                 return self::actualizarCuenta($cuentas,$cuentaBuscar,$jsonFile);
             }
             else{//-->false, no existe 
@@ -227,16 +226,18 @@
          * bien el archivo, false sino.
          */
         public static function actualizarCuenta(&$cuentas, $cuentaExistente, $jsonFile){
-            
-            foreach ($cuentas as &$cuenta) { 
-                if ($cuenta->getID() == $cuentaExistente->getID()) {
-                    $cuenta = $cuentaExistente;
-                    echo 'Actualizando cuenta...!<br>';
-                    // var_dump($cuenta);
-                    break;
+            if($cuentaExistente !== null){
+                foreach ($cuentas as &$cuenta) { 
+                    if ($cuenta->getID() == $cuentaExistente->getID()) {
+                        $cuenta = $cuentaExistente;
+                        echo 'Actualizando cuenta...!<br>';
+                        // var_dump($cuenta);
+                        break;
+                    }
                 }
+                return self::guardarJSON($cuentas,$jsonFile);
             }
-            return self::guardarJSON($cuentas,$jsonFile);
+            return false;
         } 
 
         /**
