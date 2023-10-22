@@ -52,7 +52,7 @@
         "_email": "josefhernandez@yahoo.com.ar",
         "_tipoCuenta": "CA",
         "_moneda": "$",
-        "_saldo": 3000000
+        "_saldo": 1800000
     },
     {
         "_id": 100005,
@@ -63,7 +63,7 @@
         "_email": "migkrivk@yahoo.com.ar",
         "_tipoCuenta": "CC",
         "_moneda": "USS",
-        "_saldo": 1900
+        "_saldo": 4900
     },
     {
         "_id": 100006,
@@ -107,7 +107,7 @@
         "_email": "rodridpaul@outlook.com.ar",
         "_tipoCuenta": "CA",
         "_moneda": "USS",
-        "_saldo": 64000
+        "_saldo": 62000
     },
     {
         "_id": 569067,
@@ -162,6 +162,17 @@
         "_email": "fryfrfuturama@expressgalaxy.org",
         "_tipoCuenta": "CA",
         "_moneda": "$",
-        "_saldo": 10700
+        "_saldo": 14700
+    },
+    {
+        "_id": 119665,
+        "_nombre": "Alf",
+        "_apellido": "Tanner",
+        "_tipoDocumento": "LE",
+        "_numeroDocumento": "12783918",
+        "_email": "alffie@yahoo.com",
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_saldo": 12000
     }
 ]

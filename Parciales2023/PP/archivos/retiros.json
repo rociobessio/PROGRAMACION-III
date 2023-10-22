@@ -79,5 +79,23 @@
         "_importeRetiro": 800,
         "_emailUsuario": "fryfrfuturama@expressgalaxy.org",
         "_fechaExtraccion": "2023-10-21"
+    },
+    {
+        "_id": 10,
+        "_numeroCuenta": 100004,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "$",
+        "_importeRetiro": 1200000,
+        "_emailUsuario": "josefhernandez@yahoo.com.ar",
+        "_fechaExtraccion": "2023-10-22"
+    },
+    {
+        "_id": 11,
+        "_numeroCuenta": 689712,
+        "_tipoCuenta": "CA",
+        "_monedaCuenta": "USS",
+        "_importeRetiro": 2000,
+        "_emailUsuario": "rodridpaul@outlook.com.ar",
+        "_fechaExtraccion": "2023-10-22"
     }
 ]

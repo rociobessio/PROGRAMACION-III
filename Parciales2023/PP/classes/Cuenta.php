@@ -94,7 +94,7 @@
             }
         }
         public function setSaldo($saldo){
-            if (isset($saldo) && is_float($saldo)){
+            if (is_float($saldo)){
                 $this->_saldo = $saldo;
             }
         }
@@ -112,7 +112,7 @@
          * @param string $tipoCuenta el tipo de la cuenta
          * @param float $saldo el saldo de la cuenta.
          */
-        public function __construct($id,$nombre,$apellido,$tipoDocumento,$numeroDocumento,$mail,$tipoCuenta,$moneda,$saldo = 0)
+        public function __construct($id,$nombre,$apellido,$tipoDocumento,$numeroDocumento,$mail,$tipoCuenta,$moneda,$saldo = 0.0)
         {
             $this->setID($id);
             $this->setNombre($nombre);
@@ -179,7 +179,9 @@
         /**
          * Me permite verificar si la cuenta que recibo es null o 
          * no. Si es null es una nueva cuenta a registrar dando su 
-         * alta, sino es null se actualizará su saldo.
+         * alta, sino es null se actualizará su saldo. Si la cuenta
+         * no existe su saldo inicial será 0 y ademas se dara de alta
+         * con una imagen (cliente/usuario).
          * 
          * @param Cuenta $cuenta la cuenta que se buscara para
          * saber si ya existe o no en el sistema.
@@ -200,7 +202,7 @@
                 $cuentaBuscar->setSaldo( $cuentaBuscar->getSaldo() + $saldo); 
                 return self::actualizarCuenta($cuentas,$cuentaBuscar,$jsonFile);
             }
-            else{//-->false, no existe 
+            else{//-->false, no existe, su saldo por defecto sera 0
                 $cuentas[] = $cuenta;
                 echo 'Creando cuenta...!<br>';
                 $nombreImagen = $cuenta->getID().'_' . $cuenta->getTipoCuenta() . '.jpg';
@@ -294,6 +296,28 @@
          * mediante el numero de cuenta y el tipo
          * buscado.
          * 
+         * #1: primero verifico si coincide le tipo y la cuenta
+         * con alguna ya registrada, si sucede directamente
+         * se retorna el mensaje.
+         * 
+         * #2: Caso dos busco que coincida el tipo
+         * de cuenta, lo alojo en un array.
+         * 
+         * #3: Veo si existe el id y lo guardo en
+         * otro array de cuentas.
+         * 
+         * #4: Verifico el resultado, si el array de
+         * cuentas con tipo NO esta vacio pero si el
+         * array de nro cuenta, quiere decir que hay coincidencia
+         * del tipo pero no del nro de cuenta.
+         * 
+         * #5: Si existe el numero pero no hay de tipo.
+         * 
+         * #6: No hay cuentas con X tipo directamente.
+         * 
+         * #7: No hay coincidencia ni de tipo ni de 
+         * nro de cuenta.
+         * 
          * @param array $cuentas el array de cuentas
          * @param int $numeroCuenta el numero de cuenta
          * @param string $tipo el tipo de cuenta
@@ -307,24 +331,25 @@
             $cuentasConTipo = [];
             $cuentasConNro = [];
             foreach($cuentas as $cuenta){
+                //#1
                 if($cuenta->getTipoCuenta() === $tipo && $cuenta->getID() === $numeroCuenta){
                     return 'Si hay cuentas con tipo de cuenta: ' . $tipo . ' y numero: ' . $numeroCuenta . 
                     '<br> Su saldo es: $' . $cuenta->getSaldo() . ' y la moneda de ella es: ' . $cuenta->getMoneda();
                 }
-                if($cuenta->getTipoCuenta() === $tipo){
+                if($cuenta->getTipoCuenta() === $tipo){//#2
                     $cuentasConTipo[] = $cuenta;
                 }
-                if($cuenta->getID() === $numeroCuenta)
-                { $cuentasConNro = $cuenta;}
+                if($cuenta->getID() === $numeroCuenta)//#3
+                { $cuentasConNro[] = $cuenta;}
             }
-
+            //#4
             if (!empty($cuentasConTipo) && empty($cuentasConNro)) {
                 $msj = 'Si hay cuentas con tipo: ' . $tipo . ' pero el numero: ' . $numeroCuenta . ' no le pertenece';
-            } elseif (!empty($cuentasConNro) && empty($cuentasConTipo)) {
+            } elseif (!empty($cuentasConNro) && empty($cuentasConTipo)) {//#5
                 $msj = 'Solo hay cuentas con el numero: ' . $numeroCuenta . ' pero no con el tipo: ' . $tipo;
-            } elseif (!empty($cuentasConTipo)) {
+            } elseif (!empty($cuentasConTipo)) {//#6
                 $msj = 'No hay coincidencia de tipo de cuenta: ' . $tipo . ' y numero de cuenta: ' . $numeroCuenta;
-            } else {
+            } else {//#7
                 $msj = 'No existe la combinacion de numero y tipo de cuenta.';
             }
             

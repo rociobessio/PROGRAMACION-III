@@ -78,5 +78,21 @@
         "_moneda": "$",
         "_importe": 1400,
         "_fechaDeposito": "2023-10-21"
+    },
+    {
+        "_id": 11,
+        "_numeroCuenta": 119665,
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_importe": 12000,
+        "_fechaDeposito": "2023-10-22"
+    },
+    {
+        "_id": 12,
+        "_numeroCuenta": 100005,
+        "_tipoCuenta": "CC",
+        "_moneda": "USS",
+        "_importe": 3000,
+        "_fechaDeposito": "2023-10-22"
     }
 ]

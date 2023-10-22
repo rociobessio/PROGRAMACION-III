@@ -25,8 +25,10 @@
             $cuentaExistente = Cuenta::buscarPorNumeroCuenta($cuentas,$numeroCuenta,$tipoCuenta); 
 
             if($cuentaExistente !== null){
-                if(Cuenta::actualizarCuenta($cuentas,new Cuenta($numeroCuenta,$nombre,$apellido,$tipoDocumento,
-                $numeroDocumento,$email,$tipoCuenta,$moneda,$cuentaExistente->getSaldo()),$jsonFilenameCuentas)){
+                if(Cuenta::actualizarCuenta($cuentas,
+                new Cuenta($numeroCuenta,$nombre,$apellido,$tipoDocumento,
+                $numeroDocumento,$email,$tipoCuenta,$moneda,$cuentaExistente->getSaldo()),
+                $jsonFilenameCuentas)){
                     echo json_encode(['SUCCESS' => 'La cuenta fue actualizada correctamente!<br>']);
                 }
                 else

@@ -13,7 +13,7 @@
             $jsonFilename = './archivos/banco.json'; 
             $cuenta = new Cuenta(mt_rand(100000,999999),
             $_POST['nombre'],$_POST['apellido'],$_POST['tipoDocumento'],$_POST['numeroDocumento'],$_POST['email'],
-            $_POST['tipoCuenta'],$_POST['moneda'],$saldo);
+            $_POST['tipoCuenta'],$_POST['moneda']);//-->Saldo por defecto (0)
     
             if(Cuenta::cargarCuenta($cuenta,$saldo,$jsonFilename,$imagen)){
                 echo json_encode(['SUCCESS' => 'La cuenta fue guardada correctamente!<br>']);
